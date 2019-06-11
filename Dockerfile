@@ -2,7 +2,7 @@ FROM alpine
 
 COPY target/*.jar /app.jar
 
-RUN apk --update add openjdk8-jre bash
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories && apk --update add openjdk8-jre bash
 
 EXPOSE 8080
 
