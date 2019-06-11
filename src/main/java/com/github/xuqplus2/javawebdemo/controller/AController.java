@@ -17,7 +17,7 @@ public class AController {
   String version;
 
   @GetMapping("version")
-  public String a() {
+  public String version() {
     return version;
   }
 

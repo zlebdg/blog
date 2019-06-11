@@ -63,4 +63,36 @@
         </plugins>
     </build>
 
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <pom.db.host>localhost</pom.db.host>
+                <pom.db.database>test_java_web_demo</pom.db.database>
+                <pom.db.username>test</pom.db.username>
+                <pom.db.password>123456</pom.db.password>
+            </properties>
+        </profile>
+        <profile>
+            <id>test</id>
+            <properties>
+                <pom.db.host>Tool-mysql</pom.db.host>
+                <pom.db.database>test_java_web_demo</pom.db.database>
+                <pom.db.username>test</pom.db.username>
+                <pom.db.password>123456</pom.db.password>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <pom.db.host>Tool-mysql</pom.db.host>
+                <pom.db.database>prod_java_web_demo</pom.db.database>
+                <pom.db.username>prod</pom.db.username>
+                <pom.db.password>123456</pom.db.password>
+            </properties>
+        </profile>
+    </profiles>
 </project>
