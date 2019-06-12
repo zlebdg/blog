@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AController {
 
-  @Autowired UserRepository userRepository;
+  @Autowired
+  UserRepository userRepository;
 
   @Value("${git.commit.version}")
   String version;
@@ -22,8 +23,8 @@ public class AController {
   }
 
   @GetMapping("user")
-  public User user(Long id) {
-    return userRepository.getOne(id);
+  public String user(Long id) {
+    return userRepository.getOne(id).toString();
   }
 
   @PostMapping("user")
