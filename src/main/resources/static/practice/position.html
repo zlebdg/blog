@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        div, span {
+            outline: 1px solid red;
+        }
+
+        /*气泡*/
+        .qp {
+            position: relative;
+            display: inline-block;
+            margin: 0 0 0.5em 1em;
+            max-width: 81%;
+            min-height: 1.8em;
+            border-right: 0.8em solid #ccc;
+            background-color: #ccc;
+            border-radius: 0.7em;
+            word-break: break-all;
+            padding: 0.5em 1em;
+            clear: both;
+            outline: none;
+        }
+
+        .qp:before {
+            position: absolute;
+            content: "";
+            right: 100%;
+            top: 0.6em;
+            border-top: 0.3em solid transparent;
+            border-right: 0.8em solid #ccc;
+            border-bottom: 0.3em solid transparent;
+            outline: none;
+        }
+
+        .span-static {
+            position: static;
+        }
+
+        .div-static {
+            position: static;
+        }
+
+        .span-relative {
+            position: relative;
+            background-color: #aaa;
+            left: 400px;
+            top: 400px;
+        }
+
+        .div-relative {
+            position: relative;
+            background-color: #aaa;
+            left: 400px;
+            top: 400px;
+        }
+
+        .span-absolute {
+            position: absolute;
+            background-color: green;
+        }
+
+        .div-absolute {
+            position: absolute;
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+<div class="qp">
+    文字文字文字文字 文字文字文字文字
+</div>
+<hr>
+
+<span class="span-static">
+    文字文字文字文字 文字文字文字文字
+    span-static
+</span>
+<span class="span-static">
+    文字文字文字文字 文字文字文字文字
+    span-static
+</span>
+<hr>
+<span class="" style="">
+    文字文字文字文字 文字文字文字文字
+    文字文字文字文字 文字文字文字文字
+    文字文字文字文字 文字文字文字文字
+</span>
+<span class="" style="">
+    文字文字文字文字 文字文字文字文字
+    文字文字文字文字 文字文字文字文字
+    文字文字文字文字 文字文字文字文字
+</span>
+<span class="" style="">
+    文字文字文字文字 文字文字文字文字
+    文字文字文字文字 文字文字文字文字
+    文字文字文字文字 文字文字文字文字
+</span>
+<hr>
+
+<span class="" style="float:left;clear:right;">
+    文字文字文字文字 文字文字文字文字
+    span-static float:left;clear:both;
+</span>
+<span class="" style="float:left;clear:right;">
+    文字文字文字文字 文字文字文字文字
+    span-static float:left;clear:both;
+</span>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+
+<span class="span-relative">
+    文字文字文字文字 文字文字文字文字
+    span-relative
+</span>
+<span class="span-relative">
+    文字文字文字文字 文字文字文字文字
+    span-relative
+</span>
+<div class="div-relative">
+    文字文字文字文字 文字文字文字文字
+    div-relative
+</div>
+<div class="div-relative">
+    文字文字文字文字 文字文字文字文字
+    div-relative
+</div>
+<hr>
+
+<div>
+    <span class="span-absolute" style="top:20px;left:100px;">
+        文字文字文字文字 文字文字文字文字
+    </span>
+    <span class="span-absolute" style="top:40px;left:200px;">
+        文字文字文字文字 文字文字文字文字
+    </span>
+    <div class="div-absolute" style="top:60px;left:300px;">
+        文字文字文字文字 文字文字文字文字
+    </div>
+    <div class="div-absolute" style="top:80px;left:400px;">
+        文字文字文字文字 文字文字文字文字
+    </div>
+</div>
+<hr>
+<div style="position:relative;">
+    <span class="span-absolute" style="top:20px;left:100px;">
+        文字文字文字文字 文字文字文字文字
+    </span>
+    <span class="span-absolute" style="top:40px;left:200px;">
+        文字文字文字文字 文字文字文字文字
+    </span>
+    <div class="div-absolute" style="top:60px;left:300px;">
+        文字文字文字文字 文字文字文字文字
+    </div>
+    <div class="div-absolute" style="top:80px;left:400px;">
+        文字文字文字文字 文字文字文字文字
+    </div>
+</div>
+<hr>
+<div style="background-color:blue;width:100px;height:100px;position:relative;display:inline-block;">
+    <div style="background-color:green;width:20px;height:20px;position:absolute;top:40px;left:40px;"></div>
+</div>
+<div style="background-color:blue;width:100px;height:100px;position:relative;display:inline-block;">
+    <div style="background-color:green;width:20px;height:20px;position:absolute;top:40px;left:40px;"></div>
+</div>
+<div style="background-color:blue;width:100px;height:100px;position:relative;display:inline-block;">
+    <div style="background-color:green;width:20px;height:20px;position:absolute;top:40px;left:40px;"></div>
+</div>
+<div style="background-color:blue;width:100px;height:100px;position:relative;display:inline-block;">
+    <div style="background-color:green;width:20px;height:20px;position:absolute;top:40px;left:40px;"></div>
+</div>
+<div style="background-color:blue;width:100px;height:100px;position:relative;">
+    <div style="background-color:green;width:20px;height:20px;position:absolute;top:40px;left:40px;"></div>
+</div>
+<div style="background-color:blue;width:100px;height:100px;position:relative;">
+    <div style="background-color:green;width:20px;height:20px;position:absolute;top:40px;left:40px;"></div>
+</div>
+<div style="background-color:blue;width:100px;height:100px;position:relative;color:white;">
+    <div style="background-color:green;width:20px;height:20px;position:absolute;top:40px;left:40px;"></div>
+    absolute: 相对不是默认position的父级元素定位
+</div>
+<hr>
+
+<div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+</div>
+
+<div style="background-color:yellow;width:2em;height:2em;position:fixed;top:1px;left:1px;">上</div>
+<div style="background-color:yellow;width:2em;height:2em;position:fixed;right:1px;top:1px;">右</div>
+<div style="background-color:yellow;width:2em;height:2em;position:fixed;bottom:1px;right:1px;">下</div>
+<div style="background-color:yellow;width:2em;height:2em;position:fixed;left:1px;bottom:1px;">左</div>
+<div style="background-color:yellow;width:2em;height:2em;position:fixed;left:49%;bottom:49%;">中</div>
+</body>
+</html>
