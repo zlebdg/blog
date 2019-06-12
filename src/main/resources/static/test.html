@@ -32,11 +32,11 @@
 <script>
     document.querySelector('.transition-test').addEventListener('click', function (ev) {
         console.log(ev)
-        ev.target.className = 'transition-test click'
+        ev.target.classList.add('click')
     })
     document.querySelector('.transition-test').addEventListener('mouseleave', function (ev) {
         console.log(ev)
-        ev.target.className = 'transition-test'
+        ev.target.classList.remove('click')
     })
 </script>
 </body>
