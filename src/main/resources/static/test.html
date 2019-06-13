@@ -36,6 +36,10 @@
 <div class="transition-test" id="uploadFile">
     上传文件
 </div>
+<input type="file" id="files" multiple="multiple">
+<div class="transition-test" id="uploadFiles">
+    上传多个文件
+</div>
 <script>
     document.querySelectorAll('.transition-test').forEach(function (value) {
         value.addEventListener('click', function (ev) {
@@ -87,6 +91,24 @@
             var formData = new FormData();
             formData.append("file", file)
             fetch('/test/fetch/uploadFile', {
+                method: 'POST',
+                body: formData
+            }).then(function (value) {
+                return value.text()
+            }).then(function (value) {
+                console.log('text=>', value)
+            })
+        }
+    })
+
+    document.querySelector('#uploadFiles').addEventListener('click', function (ev) {
+        var files = document.querySelector('#files').files
+        if (files) {
+            var formData = new FormData();
+            for (var i in files) {
+                formData.append("files", files[i])
+            }
+            fetch('/test/fetch/uploadFiles', {
                 method: 'POST',
                 body: formData
             }).then(function (value) {

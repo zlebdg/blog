@@ -5,8 +5,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -35,9 +38,18 @@ public class TestFetchController {
   }
 
   @PostMapping("uploadFile")
-  public Object uploadFile(MultipartFile file) throws IOException {
+  public String uploadFile(MultipartFile file) throws IOException {
     LOGGER.info("file.getOriginalFilename()={}", file.getOriginalFilename());
     file.transferTo(new File(uploadFileDir + file.getOriginalFilename()).toPath());
     return String.format("{\"filename\":\"%s\",\"status\":\"ok\"}", file.getOriginalFilename());
+  }
+
+  @PostMapping("uploadFiles")
+  public Object uploadFiles(MultipartFile[] files, HttpServletRequest request) throws IOException {
+    List<String> r = new ArrayList<>();
+    for (MultipartFile file : files) {
+      r.add(uploadFile(file));
+    }
+    return r;
   }
 }
