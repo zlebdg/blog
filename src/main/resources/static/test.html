@@ -10,33 +10,70 @@
         .transition-test {
             /*user-focus: none;*/
             user-select: none;
-            transition: background-color 2000ms;
+            transition: background-color 200ms;
         }
 
         .transition-test:hover {
             background-color: pink;
-            transition: background-color 2000ms;
+            transition: background-color 200ms;
         }
 
         .transition-test.click {
             background-color: red;
-            transition: background-color 2000ms;
+            transition: background-color 200ms;
         }
     </style>
 </head>
 <body>
 
-<div class="transition-test">
-    AAA
+<div class="transition-test" id="textOrJson">
+    进行fetch请求
+</div>
+<div class="transition-test" id="withParam">
+    支持的请求参数
 </div>
 <script>
-    document.querySelector('.transition-test').addEventListener('click', function (ev) {
-        console.log(ev)
-        ev.target.classList.add('click')
+    document.querySelectorAll('.transition-test').forEach(function (value) {
+        value.addEventListener('click', function (ev) {
+            ev.target.classList.add('click')
+            setTimeout(function () {
+                ev.target.classList.remove('click')
+            }, 220)
+        })
     })
-    document.querySelector('.transition-test').addEventListener('mouseleave', function (ev) {
-        console.log(ev)
-        ev.target.classList.remove('click')
+
+    document.querySelector('.transition-test')
+
+    document.querySelector('#textOrJson').addEventListener('click', function (ev) {
+        fetch('/test/fetch/textOrJson').then(function (value) {
+            return value.text()
+        }).then(function (value) {
+            console.log('text=>', value)
+        })
+        fetch('/test/fetch/textOrJson').then(function (value) {
+            return value.json()
+        }).then(function (value) {
+            console.log('json=>', value)
+        })
+    })
+    document.querySelector('#withParam').addEventListener('click', function (ev) {
+        fetch('/test/fetch/withParam', {
+            body: '{"a":"aa","b":"bb"}', // must match 'Content-Type' header
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, same-origin, *omit
+            headers: {
+                'user-agent': 'Mozilla/4.0 MDN Example',
+                'content-type': 'application/json'
+            },
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, cors, *same-origin
+            redirect: 'follow', // manual, *follow, error
+            referrer: 'no-referrer', // *client, no-referrer
+        }).then(function (value) {
+            return value.text()
+        }).then(function (value) {
+            console.log('text=>', value)
+        })
     })
 </script>
 </body>

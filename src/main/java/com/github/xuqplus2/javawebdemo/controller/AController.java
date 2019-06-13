@@ -11,15 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AController {
 
-  @Autowired
-  UserRepository userRepository;
+  @Autowired UserRepository userRepository;
 
   @Value("${git.commit.version}")
   String version;
 
   @GetMapping("version")
-  public String version() {
-    return version;
+  public Object version() {
+    return String.format("{\"version\":\"%s\"}", version);
   }
 
   @GetMapping("user")
