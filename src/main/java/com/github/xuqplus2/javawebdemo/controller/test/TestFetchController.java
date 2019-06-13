@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 
@@ -45,10 +46,23 @@ public class TestFetchController {
   }
 
   @PostMapping("uploadFiles")
-  public Object uploadFiles(MultipartFile[] files, HttpServletRequest request) throws IOException {
+  public Object uploadFiles(MultipartFile[] files) throws IOException {
     List<String> r = new ArrayList<>();
     for (MultipartFile file : files) {
       r.add(uploadFile(file));
+    }
+    return r;
+  }
+
+  @PostMapping("headers")
+  public Object headers(HttpServletRequest request) {
+    Enumeration<String> headerNames = request.getHeaderNames();
+    List<String> r = new ArrayList();
+    while (headerNames.hasMoreElements()) {
+      String name = headerNames.nextElement();
+      String header = String.format("%s: %s", name, request.getHeader(name));
+      LOGGER.info(header);
+      r.add(header);
     }
     return r;
   }
