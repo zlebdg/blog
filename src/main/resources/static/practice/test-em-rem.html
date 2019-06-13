@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<!--<html lang="en">-->
+<html lang="en" style="font-size:40px;">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        div, span {
+            outline: 1px solid red;
+        }
+    </style>
+</head>
+<!--<body>-->
+<body style="font-size:16px;">
+body
+测试文字abc测试文字abc
+<div style="font-size:1em;">
+    1em
+    测试文字abc测试文字abc
+</div>
+
+<div style="font-size:10px;">
+    10px
+    测试文字abc测试文字abc
+    测试文字abc测试文字abc
+    <div style="font-size:1em;">
+        1em
+        测试文字abc测试文字abc
+        测试文字abc测试文字abc
+    </div>
+    <div style="font-size:20px;">
+        20px
+        <div style="font-size:1em;">
+            1em
+            测试文字abc测试文字abc
+        </div>
+    </div>
+    <div style="font-size:40px;">
+        40px
+        <div style="font-size:1em;">
+            1em
+            测试文字abc测试文字abc
+        </div>
+        <div style="font-size:2em;">
+            2em
+            测试文字abc测试文字abc
+            <div style="font-size:1em;">
+                1em
+                测试文字abc测试文字abc
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+结论: 1em = ?px, ?是父级的font-size
+<br>
+一般body, html默认16px
+
+<hr>
+
+body
+测试文字abc测试文字abc
+<div style="font-size:1rem;">
+    1rem
+    测试文字abc测试文字abc
+</div>
+
+<div style="font-size:10px;">
+    10px
+    测试文字abc测试文字abc
+    测试文字abc测试文字abc
+    <div style="font-size:1rem;">
+        1rem
+        测试文字abc测试文字abc
+    </div>
+    <div style="font-size:20px;">
+        20px
+        <div style="font-size:1rem;">
+            1rem
+            测试文字abc测试文字abc
+        </div>
+    </div>
+    <div style="font-size:40px;">
+        40px
+        <div style="font-size:1rem;">
+            1rem
+            测试文字abc测试文字abc
+        </div>
+    </div>
+</div>
+<hr>
+结论: 1rem = ?px, ?是html的font-size
+
+</body>
+</html>
