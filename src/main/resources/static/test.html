@@ -32,6 +32,10 @@
 <div class="transition-test" id="withParam">
     支持的请求参数
 </div>
+<input type="file" id="file">
+<div class="transition-test" id="uploadFile">
+    上传文件
+</div>
 <script>
     document.querySelectorAll('.transition-test').forEach(function (value) {
         value.addEventListener('click', function (ev) {
@@ -56,6 +60,7 @@
             console.log('json=>', value)
         })
     })
+
     document.querySelector('#withParam').addEventListener('click', function (ev) {
         fetch('/test/fetch/withParam', {
             body: '{"a":"aa","b":"bb"}', // must match 'Content-Type' header
@@ -74,6 +79,22 @@
         }).then(function (value) {
             console.log('text=>', value)
         })
+    })
+
+    document.querySelector('#uploadFile').addEventListener('click', function (ev) {
+        var file = document.querySelector('#file').files[0]
+        if (file) {
+            var formData = new FormData();
+            formData.append("file", file)
+            fetch('/test/fetch/uploadFile', {
+                method: 'POST',
+                body: formData
+            }).then(function (value) {
+                return value.text()
+            }).then(function (value) {
+                console.log('text=>', value)
+            })
+        }
     })
 </script>
 </body>
