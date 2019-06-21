@@ -18,6 +18,9 @@ public class TestMailControllerTest {
   @Value("${git.commit}")
   String gitCommit;
 
+  @Value("${postfix.username}")
+  String from;
+
   /** 该测试用例可能因为标题和邮件内容被退信 */
   @Test
   public void sendSimpleMailMessage() {
@@ -26,7 +29,6 @@ public class TestMailControllerTest {
         String.format(
             "以下是工作报告内容: gitCommit=%s, DateTime=%s, text, text, 123, abc...",
             gitCommit, DateTime.now().toString("yyyy-MM-dd HH:mm:ss.sss"));
-    String from = "xuqplus@163.com";
     String[] to = {"445172495@qq.com"};
     String r = testMailController.sendSimpleMailMessage(subject, text, from, to);
 
