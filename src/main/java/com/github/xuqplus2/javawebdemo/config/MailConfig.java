@@ -1,5 +1,6 @@
 package com.github.xuqplus2.javawebdemo.config;
 
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,6 +32,7 @@ public class MailConfig {
 
   @Bean
   public JavaMailSenderImpl javaMailSender() {
+    LOGGER.info("时间={}, ", DateTime.now().toString("yyyy-MM-dd HH:mm:ss.sss"));
     if (null == javaMailSender) {
       javaMailSender = new JavaMailSenderImpl();
       javaMailSender.setDefaultEncoding("utf-8");
