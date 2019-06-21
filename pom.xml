@@ -51,6 +51,15 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.53</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.10.2</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -75,28 +84,52 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
+                <!--database-->
                 <pom.db.host>localhost</pom.db.host>
+                <pom.db.port>3306</pom.db.port>
                 <pom.db.database>test_java_web_demo</pom.db.database>
                 <pom.db.username>test</pom.db.username>
                 <pom.db.password>123456</pom.db.password>
+                <!--mail-->
+                <pom.postfix.host>smtp.163.com</pom.postfix.host>
+                <pom.postfix.port>25</pom.postfix.port>
+                <pom.postfix.protocol>smtp</pom.postfix.protocol>
+                <pom.postfix.username>xuqplus@163.com</pom.postfix.username>
+                <pom.postfix.password>f5m0eRKA7miiyUNb</pom.postfix.password>
             </properties>
         </profile>
         <profile>
             <id>test</id>
             <properties>
+                <!--database-->
                 <pom.db.host>Tool-mysql</pom.db.host>
+                <pom.db.port>3306</pom.db.port>
                 <pom.db.database>test_java_web_demo</pom.db.database>
                 <pom.db.username>test</pom.db.username>
                 <pom.db.password>123456</pom.db.password>
+                <!--mail-->
+                <pom.postfix.host>Tool-postfix</pom.postfix.host>
+                <pom.postfix.port>25</pom.postfix.port>
+                <pom.postfix.protocol>smtp</pom.postfix.protocol>
+                <pom.postfix.username></pom.postfix.username>
+                <pom.postfix.password></pom.postfix.password>
             </properties>
         </profile>
         <profile>
             <id>prod</id>
             <properties>
+                <!--database-->
                 <pom.db.host>Tool-mysql</pom.db.host>
+                <pom.db.port>3306</pom.db.port>
                 <pom.db.database>prod_java_web_demo</pom.db.database>
                 <pom.db.username>prod</pom.db.username>
                 <pom.db.password>123456</pom.db.password>
+                <!--mail-->
+                <pom.postfix.host>Tool-postfix</pom.postfix.host>
+                <pom.postfix.port>25</pom.postfix.port>
+                <pom.postfix.protocol>smtp</pom.postfix.protocol>
+                <pom.postfix.username></pom.postfix.username>
+                <pom.postfix.password></pom.postfix.password>
             </properties>
         </profile>
     </profiles>

@@ -13,12 +13,12 @@ public class AController {
 
   @Autowired UserRepository userRepository;
 
-  @Value("${git.commit.version}")
-  String version;
+  @Value("${git.commit}")
+  String gitCommit;
 
-  @GetMapping("version")
-  public Object version() {
-    return String.format("{\"version\":\"%s\"}", version);
+  @GetMapping("gitCommit")
+  public Object gitCommit() {
+    return String.format("{\"gitCommit\":\"%s\"}", gitCommit);
   }
 
   @GetMapping("user")
