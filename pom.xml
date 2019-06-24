@@ -112,7 +112,7 @@
                 <pom.postfix.port>25</pom.postfix.port>
                 <pom.postfix.protocol>smtp</pom.postfix.protocol>
                 <pom.postfix.username>postfix@xjplus.xyz</pom.postfix.username>
-                <pom.postfix.password></pom.postfix.password>
+                <pom.postfix.password>123456</pom.postfix.password>
             </properties>
         </profile>
         <profile>
@@ -129,7 +129,7 @@
                 <pom.postfix.port>25</pom.postfix.port>
                 <pom.postfix.protocol>smtp</pom.postfix.protocol>
                 <pom.postfix.username>postfix@xjplus.xyz</pom.postfix.username>
-                <pom.postfix.password></pom.postfix.password>
+                <pom.postfix.password>123456</pom.postfix.password>
             </properties>
         </profile>
     </profiles>
