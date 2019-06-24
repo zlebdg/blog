@@ -39,6 +39,7 @@ public class MailConfig {
       javaMailSender.setHost(host);
       javaMailSender.setPort(port);
       javaMailSender.setProtocol(protocol);
+      javaMailSender.getJavaMailProperties().setProperty("mail.smtp.localhost", host); // todo, 坑爹, 为什么要跟localhost say helo 呢
       if (StringUtils.isEmpty(username) && StringUtils.isEmpty(password)) {
 
       } else {
