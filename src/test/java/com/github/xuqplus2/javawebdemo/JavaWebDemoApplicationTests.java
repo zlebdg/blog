@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class JavaWebDemoApplicationTests {
+public abstract class JavaWebDemoApplicationTests {
 
   private static final String DEV = "dev";
   private static final String TEST = "test";
