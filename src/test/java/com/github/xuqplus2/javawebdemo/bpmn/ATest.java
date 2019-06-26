@@ -57,7 +57,7 @@ public class ATest extends JavaWebDemoApplicationTests {
             .createDeployment()
             .name("连线测试")
             .addClasspathResource("holiday.bpmn") // 有中文会报错, utf8编码的前3/前1字节有问题..
-//            .addClasspathResource("a.bpmn") // 1.name要以bpmn/bpmn20.xml结尾 2.修改idea设置=>editor=>file encodings, global/project文件编码=>utf8, no bom
+//            .addClasspathResource("a.bpmn") // 1.name要以.bpmn/.bpmn20.xml作为后缀名 2.修改idea设置=>editor=>file encodings, global/project文件编码=>utf8, no bom
 //            .addInputStream("a.bpmn", this.getClass().getClassLoader().getResource("a.bpmn").openStream())
             .deploy();
     logger.info("deploy={}", deploy);
@@ -125,32 +125,61 @@ public class ATest extends JavaWebDemoApplicationTests {
   }
 
   /**
-   * 查看个人任务[li si]
+   * 完成个人任务[zhang san]
    */
   @Test
-  public void test_04_taskLiSi() {
-    List<Task> tasks = taskService
+  public void test_04_completeTaskZhangSan() {
+    Task task = taskService
             .createTaskQuery()
-            .taskAssignee("li si")
+            .taskAssignee("zhang san")
             .orderByTaskCreateTime().desc()
-            .list();
-    logger.info("size()={}", tasks.size());
-    for (Task task : tasks) {
-      logger.info("task()={}", task);
+            .list()
+            .get(0);
+    logger.info("task()={}", task);
+    Assert.assertNotNull(task);
+
+    String taskId = task.getId();
+    Map variables = new HashMap();
+    try {
+      taskService.complete(taskId, variables);
+      Assert.assertNotNull(null);
+    } catch (ActivitiException e) {
+      Assert.assertNotNull(e);
     }
+    variables.put("message", "not important");
+    taskService.complete(taskId, variables);
+    Assert.assertNotNull(1);
   }
 
   /**
-   * 完成任务
+   * 完成任务 [zhang san] => [li si]
    */
   @Test
-  @Ignore
-  public void test_99_complete() {
-//    taskService.complete("9c4be982-97eb-11e9-a79a-6c2b59dad47e"); // Unknown property used in expression: ${message=='important'}
+  public void test_05_complete() {
+    test_02_processInstance(); // 创建流程实例
+    Task task = taskService
+            .createTaskQuery()
+            .taskAssignee("zhang san")
+            .orderByTaskCreateTime().desc()
+            .list()
+            .get(0);
+    logger.info("task={}", task);
+    Assert.assertNotNull(task);
 
-    Map variables = new HashMap();
+    String taskId = task.getId();
+    final Map variables = new HashMap();
     variables.put("message", "important");
-    taskService.complete("9c4be982-97eb-11e9-a79a-6c2b59dad47e", variables);
+    taskService.complete(taskId, variables); // 张三完成此任务
+
+    Task task1 = taskService.createTaskQuery()
+            .taskAssignee("li si")
+            .orderByTaskCreateTime().desc()
+            .list()
+            .get(0);
+    logger.info("task1={}", task1);
+    Assert.assertNotNull(task1);
+    taskService.complete(task1.getId()); // 李四完成此任务
+    Assert.assertNotNull(1);
   }
 
   @Test

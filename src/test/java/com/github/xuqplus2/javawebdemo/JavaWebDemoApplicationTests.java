@@ -1,7 +1,6 @@
 package com.github.xuqplus2.javawebdemo;
 
 import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,13 +14,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public abstract class JavaWebDemoApplicationTests {
 
-  private static final String DEV = "dev";
-  private static final String TEST = "test";
+  protected static final String DEV = "dev";
+  protected static final String TEST = "test";
 
   protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
   @Value("${project.profile}")
-  String profile;
+  protected String profile;
 
   /**
    * 构建环境依据此切换测试用例参数
@@ -33,8 +32,8 @@ public abstract class JavaWebDemoApplicationTests {
 
   @Before
   public void before() {
-    isProfileTest = TEST.equals(profile);
-    // isProfileTest = DEV.equals(profile);
+//    isProfileTest = TEST.equals(profile);
+    isProfileTest = DEV.equals(profile);
   }
 
   @Autowired
