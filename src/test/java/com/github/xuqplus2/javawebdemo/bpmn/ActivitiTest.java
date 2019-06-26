@@ -13,9 +13,9 @@ import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -25,7 +25,7 @@ import java.util.Map;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 @FixMethodOrder(NAME_ASCENDING) // 按照测试用例方法名升序执行
-public class ATest extends JavaWebDemoApplicationTests {
+public class ActivitiTest extends JavaWebDemoApplicationTests {
 
 
   @Autowired
@@ -77,12 +77,12 @@ public class ATest extends JavaWebDemoApplicationTests {
   @Test
   public void test_02_processInstance() {
     String processDefinitionId = "myProcess_1:9:e650891d-97f5-11e9-a947-6c2b59dad47e";
-    if (isProfileTest) {
+    if (StringUtils.isEmpty(processDefinitionId) || isTestProfile) {
       processDefinitionId = testDataRepository.getByK(genTestK("processDefinitionId")).getV();
       logger.info("processDefinitionId={}", processDefinitionId);
     }
     ProcessInstance processInstance = runtimeService.startProcessInstanceById(processDefinitionId);
-//    ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("myProcess_1");
+    // ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("myProcess_1");
     logger.info("processInstance={}", processInstance);
     Assert.assertNotNull(processInstance);
 
@@ -104,7 +104,7 @@ public class ATest extends JavaWebDemoApplicationTests {
   @Test
   public void test_03_taskZhangSan() {
     String taskId = "86604dca-9804-11e9-ba59-6c2b59dad47e";
-    if (isProfileTest) {
+    if (StringUtils.isEmpty(taskId) || isTestProfile) {
       taskId = testDataRepository.getByK(genTestK("taskId")).getV();
       logger.info("taskId={}", taskId);
     }
@@ -180,17 +180,5 @@ public class ATest extends JavaWebDemoApplicationTests {
     Assert.assertNotNull(task1);
     taskService.complete(task1.getId()); // 李四完成此任务
     Assert.assertNotNull(1);
-  }
-
-  @Test
-  @Ignore
-  public void test_99_testDataRepository() {
-    if (testDataRepository.existsById("k")) {
-      TestData testData = testDataRepository.getByK("k");
-      logger.info("testData={}", testData);
-    } else {
-      TestData testData = new TestData().setK("k").setV("v");
-      testDataRepository.save(testData);
-    }
   }
 }

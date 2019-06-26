@@ -19,6 +19,9 @@ public abstract class JavaWebDemoApplicationTests {
 
   protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+  @Autowired
+  ApplicationContext applicationContext;
+
   @Value("${project.profile}")
   protected String profile;
 
@@ -28,16 +31,13 @@ public abstract class JavaWebDemoApplicationTests {
    * 开发调试的时候需要频繁修改方法参数, 提交构建/测试的时候就需要注释掉这些参数
    * 为了避免频繁的注释/修改参数/还原代码等操作造成测试用例代码出错. 设想是这样.
    */
-  protected boolean isProfileTest;
+  protected boolean isTestProfile;
 
   @Before
   public void before() {
-    isProfileTest = TEST.equals(profile);
-//    isProfileTest = DEV.equals(profile);
+    isTestProfile = TEST.equals(profile);
+//    isTestProfile = DEV.equals(profile);
   }
-
-  @Autowired
-  ApplicationContext applicationContext;
 
   /**
    * 保存测试用例临时数据时, 使用和当前测试类相关的id
