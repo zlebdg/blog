@@ -34,7 +34,7 @@ public class JavaWebDemoApplicationTests {
   @Before
   public void before() {
     isProfileTest = TEST.equals(profile);
-    isProfileTest = DEV.equals(profile);
+    // isProfileTest = DEV.equals(profile);
   }
 
   @Autowired
