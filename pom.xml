@@ -121,6 +121,7 @@
                 <pom.postfix.password>123456</pom.postfix.password>
                 <!--activiti-->
                 <pom.activiti.use.strong.uuids>false</pom.activiti.use.strong.uuids>
+                <pom.activiti.history.level>full</pom.activiti.history.level>
             </properties>
         </profile>
         <profile>
@@ -142,6 +143,7 @@
                 <pom.postfix.password>123456</pom.postfix.password>
                 <!--activiti-->
                 <pom.activiti.use.strong.uuids>false</pom.activiti.use.strong.uuids>
+                <pom.activiti.history.level>full</pom.activiti.history.level>
             </properties>
         </profile>
         <profile>
@@ -163,6 +165,7 @@
                 <pom.postfix.password>123456</pom.postfix.password>
                 <!--activiti-->
                 <pom.activiti.use.strong.uuids>true</pom.activiti.use.strong.uuids>
+                <pom.activiti.history.level>full</pom.activiti.history.level>
             </properties>
         </profile>
     </profiles>

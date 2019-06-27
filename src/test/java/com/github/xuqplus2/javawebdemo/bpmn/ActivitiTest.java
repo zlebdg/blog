@@ -27,7 +27,6 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 @FixMethodOrder(NAME_ASCENDING) // 按照测试用例方法名升序执行
 public class ActivitiTest extends JavaWebDemoApplicationTests {
 
-
   @Autowired
   TestDataRepository testDataRepository;
 
