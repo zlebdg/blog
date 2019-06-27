@@ -76,7 +76,7 @@ public class ActivitiTest extends JavaWebDemoApplicationTests {
    */
   @Test
   public void test_02_processInstance() {
-    String processDefinitionId = "myProcess_1:9:e650891d-97f5-11e9-a947-6c2b59dad47e";
+    String processDefinitionId = "";
     if (StringUtils.isEmpty(processDefinitionId) || isTestProfile) {
       processDefinitionId = testDataRepository.getByK(genTestK("processDefinitionId")).getV();
       logger.info("processDefinitionId={}", processDefinitionId);
@@ -103,7 +103,7 @@ public class ActivitiTest extends JavaWebDemoApplicationTests {
    */
   @Test
   public void test_03_taskZhangSan() {
-    String taskId = "86604dca-9804-11e9-ba59-6c2b59dad47e";
+    String taskId = "";
     if (StringUtils.isEmpty(taskId) || isTestProfile) {
       taskId = testDataRepository.getByK(genTestK("taskId")).getV();
       logger.info("taskId={}", taskId);
