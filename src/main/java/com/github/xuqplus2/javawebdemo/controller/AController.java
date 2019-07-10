@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AController {
 
-  @Autowired UserRepository userRepository;
+  @Autowired
+  UserRepository userRepository;
 
   @Value("${git.commit}")
   String gitCommit;
@@ -28,7 +29,7 @@ public class AController {
 
   @PostMapping("user")
   public User user(Long id, String name) {
-    User user = new User().setId(id).setName(name);
+    User user = User.builder().id(id).name(name).build();
     return userRepository.save(user);
   }
 }
