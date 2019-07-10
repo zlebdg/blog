@@ -63,7 +63,7 @@
         <dependency>
             <groupId>org.activiti</groupId>
             <artifactId>activiti-spring-boot-starter</artifactId>
-            <version>7.1.0.M1</version>
+            <version>7.1.0.M2</version>
         </dependency>
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
@@ -75,6 +75,22 @@
             <artifactId>lombok</artifactId>
             <version>1.18.2</version>
         </dependency>
+        <dependency>
+            <groupId>com.alipay.sdk</groupId>
+            <artifactId>alipay-sdk-java</artifactId>
+            <version>3.7.4.ALL</version>
+        </dependency>
+
+        <!--        <dependency>-->
+        <!--            <groupId>org.activiti</groupId>-->
+        <!--            <artifactId>activiti-spring-security-policies</artifactId>-->
+        <!--            <version>7.0.0.Beta1</version>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.activiti</groupId>-->
+        <!--            <artifactId>activiti-spring-identity</artifactId>-->
+        <!--            <version>7.0.0.Beta1</version>-->
+        <!--        </dependency>-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -119,6 +135,9 @@
                 <pom.postfix.protocol>smtp</pom.postfix.protocol>
                 <pom.postfix.username>postfix@xjplus.xyz</pom.postfix.username>
                 <pom.postfix.password>123456</pom.postfix.password>
+                <!--activiti-->
+                <pom.activiti.use.strong.uuids>false</pom.activiti.use.strong.uuids>
+                <pom.activiti.history.level>full</pom.activiti.history.level>
             </properties>
         </profile>
         <profile>
@@ -139,6 +158,9 @@
                 <pom.postfix.protocol>smtp</pom.postfix.protocol>
                 <pom.postfix.username>postfix@xjplus.xyz</pom.postfix.username>
                 <pom.postfix.password>123456</pom.postfix.password>
+                <!--activiti-->
+                <pom.activiti.use.strong.uuids>false</pom.activiti.use.strong.uuids>
+                <pom.activiti.history.level>full</pom.activiti.history.level>
             </properties>
         </profile>
         <profile>
@@ -159,6 +181,9 @@
                 <pom.postfix.protocol>smtp</pom.postfix.protocol>
                 <pom.postfix.username>postfix@xjplus.xyz</pom.postfix.username>
                 <pom.postfix.password>123456</pom.postfix.password>
+                <!--activiti-->
+                <pom.activiti.use.strong.uuids>true</pom.activiti.use.strong.uuids>
+                <pom.activiti.history.level>full</pom.activiti.history.level>
             </properties>
         </profile>
     </profiles>
