@@ -6,7 +6,7 @@ import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.request.AlipaySystemOauthTokenRequest;
 import com.alipay.api.response.AlipaySystemOauthTokenResponse;
-import com.github.xuqplus2.javawebdemo.config.AlipaysApps;
+import com.github.xuqplus2.javawebdemo.config.OAuthApp;
 import com.github.xuqplus2.javawebdemo.controller.oauth.token.GithubAccessToken;
 import com.github.xuqplus2.javawebdemo.domain.GithubUserInfo;
 import com.github.xuqplus2.javawebdemo.repository.GithubUserInfoRepository;
@@ -36,7 +36,7 @@ public class OAuthCallbackController {
   @Autowired
   GithubUserInfoRepository githubUserInfoRepository;
   @Autowired
-  AlipaysApps.AlipaysApp app;
+  OAuthApp.AlipayApp alipayApp;
 
   @GetMapping("github")
   public String github(String code, String state) throws IOException {
@@ -66,11 +66,11 @@ public class OAuthCallbackController {
     log.info("callback, app_id={}, scope={}, auth_code={}, ", app_id, scope, auth_code);
     AlipayClient alipayClient = new DefaultAlipayClient(
             "https://openapi.alipay.com/gateway.do",
-            app.appId,
-            app.privateKey,
+            alipayApp.getAppId(),
+            alipayApp.getPrivateKey(),
             "json",
             "UTF-8",
-            app.publicKey,
+            alipayApp.getPublicKey(),
             "RSA2");
     AlipaySystemOauthTokenRequest request = new AlipaySystemOauthTokenRequest();
     request.setGrantType("authorization_code");

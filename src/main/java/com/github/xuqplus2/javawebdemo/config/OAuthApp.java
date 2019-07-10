@@ -1,12 +1,18 @@
 package com.github.xuqplus2.javawebdemo.config;
 
+import lombok.Builder;
+import lombok.Data;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class AlipaysApps {
+public class OAuthApp {
 
-  private static final AlipaysApp app = new AlipaysApp(
+  /**
+   * alipay app
+   */
+  private static final AlipayApp ALIPAY_APP = new AlipayApp(
           "2019071065826094",
           "浦江张学友_dev",
           "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkn07bd5/X/dtGKT5hO1KRiaj36DjzNafHRQxXTjax+ArDyr91klEf07hoQvrQjsXj1heDtsoUXYiTRyyeRPVSv246g/C/5UreXMLVwXe1kLRUalBoUMh7x/0lsbzeCcEy6TwuF0N7idMqlR/+xbcMkgpoSAVABJreIzp/SI6SH1cKzBtcPf0MFFbOpX1vx+5WlDAnsEd58jHgVK688JnHjUWdpjhxv1TAmU419F3Yz20AVHVQOH6uUWgyt2pxUTlBhTvZUH/mUHExv+Mf/xsFYQoJ+6AyBzhcSK0g40aYGLiOCkT4Crg28Rk9W579Y8k0E6Ek3RgG/fwYuokqzsGAQIDAQAB",
@@ -15,25 +21,44 @@ public class AlipaysApps {
           "http://192.168.0.107:20000/oauth/callback/alipay/");
 
   @Bean
-  public AlipaysApp app() {
-    return app;
+  public AlipayApp alipaysApp() {
+    return ALIPAY_APP;
   }
 
-  public static class AlipaysApp {
-    public String appId;
-    public String appName;
-    public String publicKey;
-    public String privateKey;
-    public String domain;
-    public String authCallbackUrl;
+  @Data
+  @Builder
+  public static class AlipayApp {
+    private String appId;
+    private String appName;
+    private String publicKey;
+    private String privateKey;
+    private String domain;
+    private String authCallbackUrl;
+  }
 
-    public AlipaysApp(String appId, String appName, String publicKey, String privateKey, String domain, String authCallbackUrl) {
-      this.appId = appId;
-      this.appName = appName;
-      this.publicKey = publicKey;
-      this.privateKey = privateKey;
-      this.domain = domain;
-      this.authCallbackUrl = authCallbackUrl;
-    }
+  /**
+   * github oauth app
+   */
+  @Value("${project.oauth.github.clientId}")
+  String clientId;
+  @Value("${project.oauth.github.clientSecret}")
+  String clientSecret;
+  @Value("${project.oauth.github.redirectUri}")
+  String redirectUri;
+  @Value("${project.oauth.github.scope}")
+  String scope;
+
+  @Bean
+  public GithubApp githubApp() {
+    return new GithubApp(clientId, clientSecret, redirectUri, scope);
+  }
+
+  @Data
+  @Builder
+  public static class GithubApp {
+    private String clientId;
+    private String clientSecret;
+    private String redirectUri;
+    private String scope;
   }
 }
