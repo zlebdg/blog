@@ -1,5 +1,6 @@
 package com.github.xuqplus2.javawebdemo.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,10 +11,10 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.util.StringUtils;
 
 @Configuration
+@Slf4j
 public class MailConfig {
 
   private static JavaMailSenderImpl javaMailSender;
-  private static final Logger LOGGER = LoggerFactory.getLogger(MailConfig.class);
 
   @Value("${postfix.host}")
   String host;
@@ -32,14 +33,14 @@ public class MailConfig {
 
   @Bean
   public JavaMailSenderImpl javaMailSender() {
-    LOGGER.info("时间={}, ", DateTime.now().toString("yyyy-MM-dd HH:mm:ss.sss"));
+    log.info("时间={}, ", DateTime.now().toString("yyyy-MM-dd HH:mm:ss.sss"));
     if (null == javaMailSender) {
       javaMailSender = new JavaMailSenderImpl();
       javaMailSender.setDefaultEncoding("utf-8");
       javaMailSender.setHost(host);
       javaMailSender.setPort(port);
       javaMailSender.setProtocol(protocol);
-      javaMailSender.getJavaMailProperties().setProperty("mail.smtp.localhost", host); // todo, 坑爹, 为什么要跟localhost say helo 呢
+      javaMailSender.getJavaMailProperties().setProperty("mail.smtp.localhost", host);
       if (StringUtils.isEmpty(username) && StringUtils.isEmpty(password)) {
 
       } else {
