@@ -10,12 +10,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("test/mail")
 public class TestMailController {
-  @Autowired MailService mailService;
-  @Autowired JavaMailSenderImpl javaMailSender;
+    @Autowired
+    MailService mailService;
+    @Autowired
+    JavaMailSenderImpl javaMailSender;
 
-  @PostMapping()
-  public String sendSimpleMailMessage(String subject, String text, String from, String... to) {
-    javaMailSender.send(mailService.createSimpleMailMessage(subject, text, from, to));
-    return "ok";
-  }
+    @PostMapping()
+    public String sendSimpleMailMessage(String subject, String text, String from, String... to) {
+        javaMailSender.send(mailService.createSimpleMailMessage(subject, text, from, to));
+        return "ok";
+    }
 }

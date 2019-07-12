@@ -8,8 +8,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 public class JavaWebDemoApplication {
 
-  public static void main(String[] args) {
-    SpringApplication.run(JavaWebDemoApplication.class, args);
-  }
+    public static void main(String[] args) {
+        SpringApplication.run(JavaWebDemoApplication.class, args);
+    }
 
 }

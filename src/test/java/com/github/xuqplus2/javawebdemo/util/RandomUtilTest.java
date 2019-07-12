@@ -7,15 +7,15 @@ import org.slf4j.LoggerFactory;
 
 public class RandomUtilTest {
 
-  private final Logger logger = LoggerFactory.getLogger(RandomUtilTest.class);
+    private final Logger logger = LoggerFactory.getLogger(RandomUtilTest.class);
 
-  @Test
-  public void numiric() {
+    @Test
+    public void numiric() {
 
-    String numiric = RandomUtil.numiric(4);
+        String numiric = RandomUtil.numiric(4);
 
-    logger.info(numiric);
+        logger.info(numiric);
 
-    Assert.assertNotNull(numiric);
-  }
+        Assert.assertNotNull(numiric);
+    }
 }

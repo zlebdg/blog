@@ -14,40 +14,40 @@ import org.springframework.util.StringUtils;
 @Slf4j
 public class MailConfig {
 
-  private static JavaMailSenderImpl javaMailSender;
+    private static JavaMailSenderImpl javaMailSender;
 
-  @Value("${postfix.host}")
-  String host;
+    @Value("${postfix.host}")
+    String host;
 
-  @Value("${postfix.port}")
-  Integer port;
+    @Value("${postfix.port}")
+    Integer port;
 
-  @Value("${postfix.protocol}")
-  String protocol;
+    @Value("${postfix.protocol}")
+    String protocol;
 
-  @Value("${postfix.username}")
-  String username;
+    @Value("${postfix.username}")
+    String username;
 
-  @Value("${postfix.password}")
-  String password;
+    @Value("${postfix.password}")
+    String password;
 
-  @Bean
-  public JavaMailSenderImpl javaMailSender() {
-    log.info("时间={}, ", DateTime.now().toString("yyyy-MM-dd HH:mm:ss.sss"));
-    if (null == javaMailSender) {
-      javaMailSender = new JavaMailSenderImpl();
-      javaMailSender.setDefaultEncoding("utf-8");
-      javaMailSender.setHost(host);
-      javaMailSender.setPort(port);
-      javaMailSender.setProtocol(protocol);
-      javaMailSender.getJavaMailProperties().setProperty("mail.smtp.localhost", host);
-      if (StringUtils.isEmpty(username) && StringUtils.isEmpty(password)) {
+    @Bean
+    public JavaMailSenderImpl javaMailSender() {
+        log.info("时间={}, ", DateTime.now().toString("yyyy-MM-dd HH:mm:ss.sss"));
+        if (null == javaMailSender) {
+            javaMailSender = new JavaMailSenderImpl();
+            javaMailSender.setDefaultEncoding("utf-8");
+            javaMailSender.setHost(host);
+            javaMailSender.setPort(port);
+            javaMailSender.setProtocol(protocol);
+            javaMailSender.getJavaMailProperties().setProperty("mail.smtp.localhost", host);
+            if (StringUtils.isEmpty(username) && StringUtils.isEmpty(password)) {
 
-      } else {
-        javaMailSender.setUsername(username);
-        javaMailSender.setPassword(password);
-      }
+            } else {
+                javaMailSender.setUsername(username);
+                javaMailSender.setPassword(password);
+            }
+        }
+        return javaMailSender;
     }
-    return javaMailSender;
-  }
 }

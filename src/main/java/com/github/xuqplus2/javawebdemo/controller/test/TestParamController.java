@@ -10,8 +10,8 @@ import java.util.Arrays;
 @RequestMapping("test/param")
 public class TestParamController {
 
-  @GetMapping
-  public String a(String[] aaa, String... bbb) {
-    return String.format("aaa->%s, bbb->%s", Arrays.asList(aaa), Arrays.asList(bbb));
-  }
+    @GetMapping
+    public String a(String[] aaa, String... bbb) {
+        return String.format("aaa->%s, bbb->%s", Arrays.asList(aaa), Arrays.asList(bbb));
+    }
 }

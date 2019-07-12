@@ -19,45 +19,45 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 public class ActivitiHistoryServiceTest extends JavaWebDemoApplicationTests {
 
 
-  @Autowired
-  TestDataRepository testDataRepository;
+    @Autowired
+    TestDataRepository testDataRepository;
 
-  @Autowired
-  ProcessEngine processEngine;
+    @Autowired
+    ProcessEngine processEngine;
 
-  @Autowired
-  RepositoryService repositoryService;
+    @Autowired
+    RepositoryService repositoryService;
 
-  @Autowired
-  RuntimeService runtimeService;
+    @Autowired
+    RuntimeService runtimeService;
 
-  @Autowired
-  TaskService taskService;
+    @Autowired
+    TaskService taskService;
 
-  @Autowired
-  HistoryService historyService;
+    @Autowired
+    HistoryService historyService;
 
-  @Test
-  public void test_01_history() {
-    Deployment deploy = repositoryService
-            .createDeployment()
-            .name("启动停止流程")
-            .addClasspathResource("a.bpmn")
-            .deploy();
-    logger.info("部署流程, deploy={}", deploy);
-    Assert.assertNotNull(deploy);
+    @Test
+    public void test_01_history() {
+        Deployment deploy = repositoryService
+                .createDeployment()
+                .name("启动停止流程")
+                .addClasspathResource("a.bpmn")
+                .deploy();
+        logger.info("部署流程, deploy={}", deploy);
+        Assert.assertNotNull(deploy);
 
-    String processDefinitionId = ((DeploymentEntityImpl) deploy).getDeployedArtifacts(ProcessDefinitionEntityImpl.class).get(0).getId();
-    ProcessInstance processInstance = runtimeService.startProcessInstanceById(processDefinitionId);
-    logger.info("流程实例, processInstance={}", processInstance);
-    Assert.assertNotNull(processInstance);
+        String processDefinitionId = ((DeploymentEntityImpl) deploy).getDeployedArtifacts(ProcessDefinitionEntityImpl.class).get(0).getId();
+        ProcessInstance processInstance = runtimeService.startProcessInstanceById(processDefinitionId);
+        logger.info("流程实例, processInstance={}", processInstance);
+        Assert.assertNotNull(processInstance);
 
-    String processInstanceId = processInstance.getId();
-    HistoricProcessInstanceQuery historicProcessInstanceQuery = historyService.createHistoricProcessInstanceQuery()
-            .processInstanceId(processInstanceId);
-    logger.info("流程实例历史, historicProcessInstanceQuery={}", historicProcessInstanceQuery);
-    Assert.assertNotNull(historicProcessInstanceQuery);
+        String processInstanceId = processInstance.getId();
+        HistoricProcessInstanceQuery historicProcessInstanceQuery = historyService.createHistoricProcessInstanceQuery()
+                .processInstanceId(processInstanceId);
+        logger.info("流程实例历史, historicProcessInstanceQuery={}", historicProcessInstanceQuery);
+        Assert.assertNotNull(historicProcessInstanceQuery);
 
-    Assert.assertNotNull(processDefinitionId);
-  }
+        Assert.assertNotNull(processDefinitionId);
+    }
 }
