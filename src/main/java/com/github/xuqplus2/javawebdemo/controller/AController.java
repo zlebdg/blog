@@ -38,6 +38,7 @@ public class AController {
     public String aaa() {
         return String.format("ok, 路径: aaa, 授权名字: %s", SecurityContextHolder.getContext().getAuthentication().getName());
     }
+
     @GetMapping("userInfo")
     public String userInfo() {
         return String.format("ok, 路径: aaa, 授权名字: %s", SecurityContextHolder.getContext().getAuthentication().getName());

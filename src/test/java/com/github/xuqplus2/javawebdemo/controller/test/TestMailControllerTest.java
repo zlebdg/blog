@@ -15,9 +15,6 @@ public class TestMailControllerTest extends JavaWebDemoApplicationTests {
     @Value("${git.commit}")
     String gitCommit;
 
-    @Value("${postfix.username}")
-    String from;
-
     /**
      * 该测试用例可能因为标题, 邮件内容, 发件频率...等等原因被退信
      * 所以最好到qq邮箱添加白名单
@@ -33,9 +30,8 @@ public class TestMailControllerTest extends JavaWebDemoApplicationTests {
                 String.format(
                         "内容: gitCommit=%s, text, 123abc...", gitCommit);
         String[] to = {"445172495@qq.com"};
-        String r = testMailController.sendSimpleMailMessage(subject, text, from, to);
+        String r = testMailController.sendSimpleMailMessage(subject, text, to);
 
-        logger.info("邮件已经发出, subject={}, text={}, from={}, to={}", subject, text, from, to);
         Assert.assertEquals("ok", r);
     }
 }
