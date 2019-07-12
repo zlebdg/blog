@@ -179,11 +179,11 @@
                 <!--oauth client-->
                 <pom.security.oauth2.client.client-id>client</pom.security.oauth2.client.client-id>
                 <pom.security.oauth2.client.client-secret>secret</pom.security.oauth2.client.client-secret>
-                <pom.security.oauth2.client.access-token-uri>http://106.12.80.76:8081/oauth/token
+                <pom.security.oauth2.client.access-token-uri>http://106.12.80.76:20011/oauth/token
                 </pom.security.oauth2.client.access-token-uri>
-                <pom.security.oauth2.client.user-authorization-uri>http://106.12.80.76:8081/oauth/authorize
+                <pom.security.oauth2.client.user-authorization-uri>http://106.12.80.76:20011/oauth/authorize
                 </pom.security.oauth2.client.user-authorization-uri>
-                <pom.security.oauth2.resource.token-info-uri>http://106.12.80.76:8081/oauth/check_token
+                <pom.security.oauth2.resource.token-info-uri>http://106.12.80.76:20011/oauth/check_token
                 </pom.security.oauth2.resource.token-info-uri>
             </properties>
         </profile>
@@ -211,11 +211,11 @@
                 <!--oauth client-->
                 <pom.security.oauth2.client.client-id>client</pom.security.oauth2.client.client-id>
                 <pom.security.oauth2.client.client-secret>secret</pom.security.oauth2.client.client-secret>
-                <pom.security.oauth2.client.access-token-uri>http://106.12.80.76:8081/oauth/token
+                <pom.security.oauth2.client.access-token-uri>http://106.12.80.76:20010/oauth/token
                 </pom.security.oauth2.client.access-token-uri>
-                <pom.security.oauth2.client.user-authorization-uri>http://106.12.80.76:8081/oauth/authorize
+                <pom.security.oauth2.client.user-authorization-uri>http://106.12.80.76:20010/oauth/authorize
                 </pom.security.oauth2.client.user-authorization-uri>
-                <pom.security.oauth2.resource.token-info-uri>http://106.12.80.76:8081/oauth/check_token
+                <pom.security.oauth2.resource.token-info-uri>http://106.12.80.76:20010/oauth/check_token
                 </pom.security.oauth2.resource.token-info-uri>
             </properties>
         </profile>
