@@ -11,8 +11,7 @@
     <groupId>com.github.xuqplus2</groupId>
     <artifactId>java-web-demo</artifactId>
     <version>0.0.1</version>
-    <name>java-web-demo</name>
-    <description>Demo project</description>
+    <name>blog</name>
 
     <properties>
         <java.version>1.8</java.version>
@@ -150,11 +149,11 @@
                 <!--oauth client-->
                 <pom.security.oauth2.client.client-id>client</pom.security.oauth2.client.client-id>
                 <pom.security.oauth2.client.client-secret>secret</pom.security.oauth2.client.client-secret>
-                <pom.security.oauth2.client.access-token-uri>http://dev.local:20010/oauth/token
+                <pom.security.oauth2.client.access-token-uri>http://auth.local:20010/oauth/token
                 </pom.security.oauth2.client.access-token-uri>
-                <pom.security.oauth2.client.user-authorization-uri>http://dev.local:20010/oauth/authorize
+                <pom.security.oauth2.client.user-authorization-uri>http://auth.local:20010/oauth/authorize
                 </pom.security.oauth2.client.user-authorization-uri>
-                <pom.security.oauth2.resource.token-info-uri>http://dev.local:20010/oauth/check_token
+                <pom.security.oauth2.resource.token-info-uri>http://auth.local:20010/oauth/check_token
                 </pom.security.oauth2.resource.token-info-uri>
             </properties>
         </profile>
