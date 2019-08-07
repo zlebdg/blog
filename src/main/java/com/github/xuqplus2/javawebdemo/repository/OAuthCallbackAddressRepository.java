@@ -9,12 +9,12 @@ import javax.transaction.Transactional;
 
 public interface OAuthCallbackAddressRepository extends JpaRepository<OAuthCallbackAddress, String> {
 
-    boolean existsByEncryptSessionIdAndIsDeletedFalse(String id);
+    boolean existsByIdAndIsDeletedFalse(String id);
 
-    OAuthCallbackAddress getByEncryptSessionIdAndIsDeletedFalse(String id);
+    OAuthCallbackAddress getByIdAndIsDeletedFalse(String id);
 
     @Transactional
     @Modifying
-    @Query("update OAuthCallbackAddress a set a.referer = ?1, a.updateAt = ?2 where a.encryptSessionId = ?3")
-    void updateRefererById(String referer, long l, String sessionId);
+    @Query("update OAuthCallbackAddress a set a.referer = ?1, a.updateAt = ?2 where a.id = ?3")
+    void updateRefererById(String referer, long l, String id);
 }

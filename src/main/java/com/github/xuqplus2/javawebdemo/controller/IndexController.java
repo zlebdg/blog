@@ -25,15 +25,6 @@ public class IndexController {
 
     @GetMapping("/")
     public Object index(HttpServletRequest request) {
-        String sessionId = request.getSession().getId();
-        if (null != sessionId) {
-            String encryptSessionId = encryptService.sha256Md5(sessionId);
-            log.info("sessionId=>{}, encryptSessionId=>{}, ", sessionId, encryptSessionId);
-            if (callbackAddressRepository.existsByEncryptSessionIdAndIsDeletedFalse(encryptSessionId)) {
-                OAuthCallbackAddress address = callbackAddressRepository.getByEncryptSessionIdAndIsDeletedFalse(encryptSessionId);
-                log.info("sessionId=>{}, encryptSessionId=>{}, referer=>{}", sessionId, encryptSessionId, address.getReferer());
-            }
-        }
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         org.springframework.security.oauth2.client.token.grant.code.AuthorizationCodeAccessTokenProvider a;
         return String.format("授权信息: 名称=%s, 信息=%s, 凭据=%s, 权限=%s, ",

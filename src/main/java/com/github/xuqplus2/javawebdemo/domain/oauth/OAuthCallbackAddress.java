@@ -10,14 +10,14 @@ import javax.persistence.Id;
 @Entity
 public class OAuthCallbackAddress extends BasicDomain {
     @Id
-    private String encryptSessionId; // sessionId散列
+    private String id;
     private String referer;
 
     public OAuthCallbackAddress() {
     }
 
-    public OAuthCallbackAddress(String sessionId, String referer) {
-        this.encryptSessionId = sessionId;
+    public OAuthCallbackAddress(String id, String referer) {
+        this.id = id;
         this.referer = referer;
     }
 }
