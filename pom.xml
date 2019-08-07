@@ -129,7 +129,7 @@
                 <!--database-->
                 <pom.db.host>localhost</pom.db.host>
                 <pom.db.port>3306</pom.db.port>
-                <pom.db.database>test_java_web_demo</pom.db.database>
+                <pom.db.database>test_blog</pom.db.database>
                 <pom.db.username>test</pom.db.username>
                 <pom.db.password>123456</pom.db.password>
                 <!--mail-->
@@ -166,7 +166,7 @@
                 <!--database-->
                 <pom.db.host>Tool-mysql</pom.db.host>
                 <pom.db.port>3306</pom.db.port>
-                <pom.db.database>test_java_web_demo</pom.db.database>
+                <pom.db.database>test_blog</pom.db.database>
                 <pom.db.username>test</pom.db.username>
                 <pom.db.password>123456</pom.db.password>
                 <!--mail-->
@@ -198,7 +198,7 @@
                 <!--database-->
                 <pom.db.host>Tool-mysql</pom.db.host>
                 <pom.db.port>3306</pom.db.port>
-                <pom.db.database>prod_java_web_demo</pom.db.database>
+                <pom.db.database>prod_blog</pom.db.database>
                 <pom.db.username>prod</pom.db.username>
                 <pom.db.password>123456</pom.db.password>
                 <!--mail-->

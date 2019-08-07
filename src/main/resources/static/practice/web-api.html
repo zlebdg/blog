@@ -48,27 +48,27 @@
 <script>
     document.querySelectorAll('.transition-test').forEach(function (value) {
         value.addEventListener('click', function (ev) {
-            ev.target.classList.add('click')
+            ev.target.classList.add('click');
             setTimeout(function () {
                 ev.target.classList.remove('click')
             }, 220)
         })
-    })
+    });
 
-    document.querySelector('.transition-test')
+    document.querySelector('.transition-test');
 
     document.querySelector('#textOrJson').addEventListener('click', function (ev) {
         fetch('/test/fetch/textOrJson').then(function (value) {
             return value.text()
         }).then(function (value) {
             console.log('text=>', value)
-        })
+        });
         fetch('/test/fetch/textOrJson').then(function (value) {
             return value.json()
         }).then(function (value) {
             console.log('json=>', value)
         })
-    })
+    });
 
     document.querySelector('#withParam').addEventListener('click', function (ev) {
         fetch('/test/fetch/withParam', {
@@ -88,13 +88,13 @@
         }).then(function (value) {
             console.log('text=>', value)
         })
-    })
+    });
 
     document.querySelector('#uploadFile').addEventListener('click', function (ev) {
-        var file = document.querySelector('#file').files[0]
+        var file = document.querySelector('#file').files[0];
         if (file) {
             var formData = new FormData();
-            formData.append("file", file)
+            formData.append("file", file);
             fetch('/test/fetch/uploadFile', {
                 method: 'POST',
                 body: formData
@@ -104,10 +104,10 @@
                 console.log('text=>', value)
             })
         }
-    })
+    });
 
     document.querySelector('#uploadFiles').addEventListener('click', function (ev) {
-        var files = document.querySelector('#files').files
+        var files = document.querySelector('#files').files;
         if (files.length > 0) {
             var formData = new FormData();
             for (var i in files) {
@@ -123,17 +123,17 @@
                 console.log('text=>', value)
             })
         }
-    })
+    });
 
     document.querySelector('#headers').addEventListener('click', function (ev) {
-        var headers = new Headers()
+        var headers = new Headers();
         headers.append("Content-Type", "text/plain");
         headers.append("xxxx", "123456");
         headers.append("xxx", "123456");
-        headers.set("xx", "xx")
-        headers.set("xxxx", "xxxx")
-        headers.set("User-Agent", "lalala")
-        console.log('xxx=>' + headers.get('xxx'))
+        headers.set("xx", "xx");
+        headers.set("xxxx", "xxxx");
+        headers.set("User-Agent", "lalala");
+        console.log('xxx=>' + headers.get('xxx'));
         fetch('/test/fetch/headers', {
             method: 'POST',
             headers: headers
