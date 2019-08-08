@@ -11,6 +11,7 @@ import org.springframework.util.StringUtils;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
@@ -54,6 +55,15 @@ public class AppLoginFilter implements Filter {
                     if (callbackAddressRepository.existsByIdAndIsDeletedFalse(state)) {
                         OAuthCallbackAddress address = callbackAddressRepository.getByIdAndIsDeletedFalse(state);
                         log.info("address=>{}", address);
+                        if (null != address && !StringUtils.isEmpty(address.getReferer()) && !address.getReferer().equals(referer)) {
+                            if (response instanceof HttpServletResponse) {
+                                HttpServletResponse httpServletResponse = (HttpServletResponse) response;
+                                httpServletResponse
+                                        .sendRedirect(String.format("%s#/oauth/callbackPage?%s",
+                                                address.getReferer(), httpServletRequest.getQueryString()));
+                                return;
+                            }
+                        }
                     }
                 }
             }
