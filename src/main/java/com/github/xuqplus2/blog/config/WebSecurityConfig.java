@@ -1,5 +1,6 @@
 package com.github.xuqplus2.blog.config;
 
+import com.github.xuqplus2.blog.config.kz.AppDefaultAccessTokenConverter;
 import com.github.xuqplus2.blog.filter.AppLoginFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
@@ -7,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.oauth2.client.filter.OAuth2ClientAuthenticationProcessingFilter;
+import org.springframework.security.oauth2.provider.token.RemoteTokenServices;
 import org.springframework.security.web.authentication.preauth.AbstractPreAuthenticatedProcessingFilter;
 
 @Configuration
@@ -32,5 +34,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/login**").permitAll()
                 .anyRequest().authenticated().and()
                 .csrf().disable();
+    }
+
+    @Autowired
+    public void CheckTokenEndpoint(RemoteTokenServices services) {
+        AppDefaultAccessTokenConverter converter = new AppDefaultAccessTokenConverter();
+        services.setAccessTokenConverter(converter);
     }
 }

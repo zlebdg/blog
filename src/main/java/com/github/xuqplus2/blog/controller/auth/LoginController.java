@@ -2,7 +2,9 @@ package com.github.xuqplus2.blog.controller.auth;
 
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,9 +17,12 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginController {
 
     @RequestMapping("currentUser")
-    public String login(HttpServletRequest request, HttpServletResponse response) {
-        String referer = request.getHeader("Referer");
-        log.info("referer=>{}", referer);
-        return JSON.toJSONString(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+    public Object login(HttpServletRequest request, HttpServletResponse response) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        OAuth2AuthenticationDetails a;
+        Object credentials = authentication.getCredentials();
+
+        return credentials;
     }
 }
