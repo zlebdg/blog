@@ -28,6 +28,7 @@ public class LoginController {
     public ResponseEntity logout() {
         // 清除状态
         SecurityContextHolder.clearContext();
+        SecurityContextHolder.getContext().setAuthentication(null);
         return BasicResp.ok();
     }
 }

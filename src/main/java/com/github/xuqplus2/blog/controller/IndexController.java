@@ -6,11 +6,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @Slf4j
 @RequestMapping
@@ -23,13 +26,15 @@ public class IndexController {
     EncryptService encryptService;
 
     @GetMapping("/")
-    public Object index(HttpServletRequest request) {
+    public Object index(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String referer = request.getHeader("Referer");
+        if (!StringUtils.isEmpty(referer)) {
+            response.sendRedirect(String.format("%s#/oauth/callbackPage", referer));
+            return null;
+        }
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        org.springframework.security.oauth2.client.token.grant.code.AuthorizationCodeAccessTokenProvider a;
-        return String.format("授权信息: 名称=%s, 信息=%s, 凭据=%s, 权限=%s, ",
-                authentication.getName(),
-                authentication.getPrincipal(),
-                authentication.getCredentials(),
-                authentication.getAuthorities());
+        Object principal = authentication.getPrincipal();
+        log.info("principal=>{}", principal);
+        return principal;
     }
 }
