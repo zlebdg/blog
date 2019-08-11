@@ -25,9 +25,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterBefore(appLoginFilter, AbstractPreAuthenticatedProcessingFilter.class)
                 .antMatcher("/**")
                 .authorizeRequests()
+                .antMatchers("/article**/**").hasAuthority("article")
                 .antMatchers("/",
                         "/auth**/**",
-                        "/article**/**",
+                        "/public**/**",
                         "/login**").permitAll()
                 .anyRequest().authenticated().and()
                 .csrf().disable();

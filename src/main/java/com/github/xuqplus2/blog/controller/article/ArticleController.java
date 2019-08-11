@@ -18,7 +18,7 @@ public class ArticleController {
     ArticleRepository articleRepository;
 
     @GetMapping
-    public ResponseEntity a(Long id) {
+    public ResponseEntity query(Long id) {
         Article article = articleRepository.getById(id);
         if (null != article)
             return BasicResp.ok(article);
@@ -26,7 +26,7 @@ public class ArticleController {
     }
 
     @PostMapping
-    public ResponseEntity a(Article article) {
+    public ResponseEntity post(Article article) {
         if (null == article.getId()) {
             articleRepository.save(article);
             return BasicResp.ok(article.getId());
