@@ -1,5 +1,6 @@
 package com.github.xuqplus2.blog.domain;
 
+import com.github.xuqplus2.blog.vo.req.ArticleReq;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -12,10 +13,8 @@ public class Article extends BasicDomain {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
-    @Lob // longtext类型, 保存ok, 查询ok
-    // @Column(columnDefinition = "longblob") // 保存ok, 如果不同时使用 @Lob 注解, 查询可能乱码
-    // todo, 存储表情报错
-    private String text;
+    @OneToOne(fetch = FetchType.LAZY)
+    private AppText appText;
     @Lob
     private String preview; // 预览内容, 从text中提取
     @NotEmpty
@@ -23,10 +22,24 @@ public class Article extends BasicDomain {
     @Column(unique = true)
     private String hash; // userId + hash(标题 + 内容), 可用于防止重复提交
 
-    public void set(Article article) {
+    @ManyToOne
+    private User author;
+    @OneToOne
+    private ArticleInfo articleInfo;
+
+    public Article() {
+    }
+
+    public Article(ArticleReq article) {
         this.title = article.getTitle();
-        this.text = article.getText();
+        this.preview = article.getPreview();
         this.parseType = article.getParseType();
         this.hash = article.getHash();
+    }
+
+    public void set(ArticleReq articleReq) {
+        this.title = articleReq.getTitle();
+        this.parseType = articleReq.getParseType();
+        this.hash = articleReq.getHash();
     }
 }
