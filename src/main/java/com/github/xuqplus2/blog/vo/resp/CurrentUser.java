@@ -22,4 +22,8 @@ public class CurrentUser extends VO {
 
     public CurrentUser() {
     }
+
+    public String getUserId() {
+        return this.username + "@" + this.appId;
+    }
 }

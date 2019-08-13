@@ -11,11 +11,13 @@ import javax.persistence.Id;
 public class ArticleInfo extends BasicDomain {
     @Id
     private Long id;
-    private Integer oppose; // 反对
-    private Integer star; // 点赞
-    private Integer comment; // 评论
-    private Integer trans; // 转发
-    private Integer collect; // 收藏
+    @Column(name = "like_")
+    private int like; // 点赞
+    private int dislike; // 反对
+    private int star; // 星星
+    @Column(name = "comment_")
+    private int comment; // 评论
+    private int trans; // 转发
     @Column(name = "read_")
-    private Integer read; // 阅读
+    private int read; // 阅读
 }
