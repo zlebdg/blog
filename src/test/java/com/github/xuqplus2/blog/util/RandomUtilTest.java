@@ -12,7 +12,7 @@ public class RandomUtilTest {
     @Test
     public void numiric() {
 
-        String numiric = RandomUtil.numiric(4);
+        String numiric = RandomUtil.numeric(4);
 
         logger.info(numiric);
 

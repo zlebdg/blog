@@ -31,6 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/article**/**").hasAuthority("article")
                 .antMatchers("/",
                         "/auth**/**",
+                        "/test**/**",
                         "/public**/**",
                         "/login**").permitAll()
                 .anyRequest().authenticated().and()
