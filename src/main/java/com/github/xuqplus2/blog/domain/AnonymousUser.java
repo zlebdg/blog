@@ -1,6 +1,7 @@
 package com.github.xuqplus2.blog.domain;
 
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -14,5 +15,4 @@ public class AnonymousUser implements Serializable {
     private String id;
     private String username;
     private String ip;
-    private String v; // 版本号
 }

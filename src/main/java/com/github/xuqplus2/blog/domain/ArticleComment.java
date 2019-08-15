@@ -1,20 +1,25 @@
 package com.github.xuqplus2.blog.domain;
 
+import com.github.xuqplus2.blog.vo.req.ArticleCommentReq;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Data
 @Entity
+@NoArgsConstructor
 public class ArticleComment extends BasicDomain {
-    @Id
-    private Long id;
 
+    // 大于此长度用 longtext 保存
+    public static final int MIN_LOB_COMMENT_LENGTH = 1000;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @ManyToOne
     private User author;
+    @ManyToOne
     private AnonymousUser anonymousAuthor;
     @ManyToOne
     private Article article;
@@ -23,4 +28,70 @@ public class ArticleComment extends BasicDomain {
     @OneToOne
     private AppText text;
     private String comment;
+    private String parseType;
+    private String hash;
+
+    public ArticleComment(ArticleCommentReq req) {
+        this.hash = req.getHash();
+        this.parseType = req.getParseType();
+        if (req.getComment().length() >= MIN_LOB_COMMENT_LENGTH) {
+            this.comment = req.getComment();
+        } else {
+            AppText text = new AppText();
+            text.setText(req.getComment());
+            this.text = text;
+        }
+    }
+
+    public String getAuthorId() {
+        if (null != this.author)
+            return this.author.getId();
+        if (null != this.anonymousAuthor)
+            return this.anonymousAuthor.getId();
+        return null;
+    }
+
+    public String getAuthorUsername() {
+        if (null != this.author)
+            return this.author.getUsername();
+        if (null != this.anonymousAuthor)
+            return this.anonymousAuthor.getUsername();
+        return null;
+    }
+
+    public String getAuthorNickname() {
+        if (null != this.author)
+            return this.author.getAppId();
+        return null;
+    }
+
+    public String getAuthorAppId() {
+        if (null != this.author)
+            return this.author.getAppId();
+        return null;
+    }
+
+    public String getAuthorAvatar() {
+        if (null != this.author)
+            return this.author.getAvatar();
+        return null;
+    }
+
+    public Long getReplyToId() {
+        if (null != this.replyTo)
+            return this.replyTo.getId();
+        return null;
+    }
+
+    public String getReplyToAuthorId() {
+        if (null != this.replyTo)
+            return this.replyTo.getAuthorId();
+        return null;
+    }
+
+    public String getReplyToAuthorUsername() {
+        if (null != this.replyTo)
+            return this.replyTo.getAuthorUsername();
+        return null;
+    }
 }

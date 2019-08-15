@@ -8,6 +8,7 @@ import com.github.xuqplus2.blog.repository.AppTextRepository;
 import com.github.xuqplus2.blog.repository.ArticleInfoRepository;
 import com.github.xuqplus2.blog.repository.ArticleRepository;
 import com.github.xuqplus2.blog.repository.UserRepository;
+import com.github.xuqplus2.blog.util.AppNotLoginException;
 import com.github.xuqplus2.blog.util.CurrentUserUtil;
 import com.github.xuqplus2.blog.vo.req.ArticleReq;
 import com.github.xuqplus2.blog.vo.resp.ArticleResp;
@@ -56,7 +57,7 @@ public class ArticleController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity post(@Valid ArticleReq article, BindingResult bindingResult) {
+    public ResponseEntity post(@Valid ArticleReq article, BindingResult bindingResult) throws AppNotLoginException {
         if (null == article.getId()) {
             /* hash 防重复提交, todo, hash碰撞 */
             if (!articleRepository.existsByHash(article.getHash())) {
