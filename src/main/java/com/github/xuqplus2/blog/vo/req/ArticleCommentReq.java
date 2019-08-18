@@ -12,7 +12,7 @@ public class ArticleCommentReq extends VO {
     private Long articleId;
     private Long replyToId;
     @NotEmpty
-    private String comment;
+    private String text;
     @NotEmpty
     private String parseType;
     @NotEmpty

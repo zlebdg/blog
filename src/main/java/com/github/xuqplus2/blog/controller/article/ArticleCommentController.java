@@ -11,15 +11,23 @@ import com.github.xuqplus2.blog.vo.resp.ArticleCommentResp;
 import com.github.xuqplus2.blog.vo.resp.BasicResp;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.JpaSort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
@@ -47,8 +55,8 @@ public class ArticleCommentController {
             throw new RuntimeException("回复的评论不存在, id=" + req.getReplyToId());
         }
         ArticleComment articleComment = new ArticleComment(req);
-        if (null != articleComment.getText()) {
-            appTextRepository.save(articleComment.getText());
+        if (null != articleComment.getAppText()) {
+            appTextRepository.save(articleComment.getAppText());
         }
         try {
             User user = CurrentUserUtil.currentUser(userRepository);
@@ -56,6 +64,7 @@ public class ArticleCommentController {
         } catch (AppNotLoginException e) {
             AnonymousUser anonymousUser = new AnonymousUser();
             anonymousUser.setId(UUID.randomUUID().toString());
+            // todo
             anonymousUser.setIp("xxxx");
             anonymousUser.setUsername("一位不愿透露姓名的网友");
             anonymousUserRepository.save(anonymousUser);
@@ -63,7 +72,17 @@ public class ArticleCommentController {
         }
         articleCommentRepository.save(articleComment);
         articleCommentRepository.updateArticleIdAndReplyToId(req.getArticleId(), req.getReplyToId(), articleComment.getId());
-        ArticleCommentResp resp = new ArticleCommentResp(articleComment);
-        return BasicResp.ok();
+        return BasicResp.ok(articleComment.getId());
+    }
+
+    @GetMapping
+    public ResponseEntity comments(Long id, Integer page, Integer size) {
+        Sort sort = JpaSort.by(Sort.Direction.DESC, "createAt");
+        PageRequest pageRequest = PageRequest.of(page, size, sort);
+        Page<ArticleComment> r = articleCommentRepository.findAllByArticleIdAndReplyToNull(id, pageRequest);
+        List<ArticleCommentResp> collect = r.stream().map(c -> {
+            return new ArticleCommentResp(c, articleCommentRepository);
+        }).collect(Collectors.toList());
+        return BasicResp.ok(new PageImpl(collect, pageRequest, r.getTotalElements()));
     }
 }

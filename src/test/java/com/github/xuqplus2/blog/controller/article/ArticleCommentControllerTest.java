@@ -15,9 +15,9 @@ public class ArticleCommentControllerTest extends BlogApplicationTests {
     public void post() {
         ArticleCommentReq req = new ArticleCommentReq();
         req.setArticleId(1L);
-        req.setComment("hahaha");
+        req.setText("haha, 评论...");
         req.setParseType("0.0.1");
-        req.setHash("haha");
+        req.setHash("hash");
 
         ResponseEntity post = controller.post(req, null);
 

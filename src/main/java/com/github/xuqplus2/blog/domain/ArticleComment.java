@@ -26,20 +26,21 @@ public class ArticleComment extends BasicDomain {
     @ManyToOne
     private ArticleComment replyTo;
     @OneToOne
-    private AppText text;
-    private String comment;
+    private AppText appText;
+    private String text;
+    private boolean hasReplies;
     private String parseType;
     private String hash;
 
     public ArticleComment(ArticleCommentReq req) {
         this.hash = req.getHash();
         this.parseType = req.getParseType();
-        if (req.getComment().length() >= MIN_LOB_COMMENT_LENGTH) {
-            this.comment = req.getComment();
+        if (req.getText().length() >= MIN_LOB_COMMENT_LENGTH) {
+            this.text = req.getText();
         } else {
-            AppText text = new AppText();
-            text.setText(req.getComment());
-            this.text = text;
+            AppText appText = new AppText();
+            appText.setText(req.getText());
+            this.appText = appText;
         }
     }
 
@@ -93,5 +94,12 @@ public class ArticleComment extends BasicDomain {
         if (null != this.replyTo)
             return this.replyTo.getAuthorUsername();
         return null;
+    }
+
+    public String getText() {
+        if (null == text && null != appText) {
+            return appText.getText();
+        }
+        return text;
     }
 }
