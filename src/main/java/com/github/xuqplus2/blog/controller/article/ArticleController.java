@@ -14,8 +14,13 @@ import com.github.xuqplus2.blog.vo.req.ArticleReq;
 import com.github.xuqplus2.blog.vo.resp.ArticleResp;
 import com.github.xuqplus2.blog.vo.resp.BasicResp;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.JpaSort;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +29,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequestMapping({"article", "public/article"})
 @RestController
@@ -87,8 +94,32 @@ public class ArticleController {
         }
     }
 
+    /**
+     * 文章分页查询接口,
+     *
+     * @param userId
+     * @param page
+     * @param size
+     * @return
+     */
     @GetMapping("query")
-    public ResponseEntity query(PageRequest pageRequest) {
-        return null;
+    public ResponseEntity query(String userId, Integer page, Integer size) {
+        if (!StringUtils.isEmpty(userId)) {
+            Sort sort = JpaSort.by(Sort.Direction.DESC, "createAt");
+            PageRequest pageRequest = PageRequest.of(page, size, sort);
+            Page<Article> articles = articleRepository.findAllByAuthorId(userId, pageRequest);
+            List<ArticleResp> collect = articles.stream().map(a -> {
+                return new ArticleResp(a, true);
+            }).collect(Collectors.toList());
+            return BasicResp.ok(new PageImpl(collect, pageRequest, articles.getTotalElements()));
+        } else {
+            Sort sort = JpaSort.by(Sort.Direction.DESC, "createAt");
+            PageRequest pageRequest = PageRequest.of(page, size, sort);
+            Page<Article> articles = articleRepository.findAll(pageRequest);
+            List<ArticleResp> collect = articles.stream().map(a -> {
+                return new ArticleResp(a, true);
+            }).collect(Collectors.toList());
+            return BasicResp.ok(new PageImpl(collect, pageRequest, articles.getTotalElements()));
+        }
     }
 }

@@ -32,4 +32,16 @@ public class ArticleResp extends VO {
         this.author = article.getAuthor();
         this.articleInfo = article.getArticleInfo();
     }
+
+    public ArticleResp(Article article, boolean withoutText) {
+        this.id = article.getId();
+        this.createAt = article.getCreateAt();
+        this.updateAt = article.getUpdateAt();
+        this.title = article.getTitle();
+        this.preview = article.getPreview();
+        this.parseType = article.getParseType();
+        this.hash = article.getHash();
+        this.author = article.getAuthor();
+        this.articleInfo = article.getArticleInfo();
+    }
 }
