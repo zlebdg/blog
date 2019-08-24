@@ -6,6 +6,7 @@ import com.github.xuqplus2.blog.domain.User;
 import com.github.xuqplus2.blog.repository.*;
 import com.github.xuqplus2.blog.util.AppNotLoginException;
 import com.github.xuqplus2.blog.util.CurrentUserUtil;
+import com.github.xuqplus2.blog.util.RequestUtil;
 import com.github.xuqplus2.blog.vo.req.ArticleCommentReq;
 import com.github.xuqplus2.blog.vo.resp.ArticleCommentResp;
 import com.github.xuqplus2.blog.vo.resp.BasicResp;
@@ -31,7 +32,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
-@RequestMapping("articleComment")
+@RequestMapping({"articleComment", "public/articleComment"})
 public class ArticleCommentController {
 
     @Autowired
@@ -62,17 +63,19 @@ public class ArticleCommentController {
             User user = CurrentUserUtil.currentUser(userRepository);
             articleComment.setAuthor(user);
         } catch (AppNotLoginException e) {
+            String remoteIp = RequestUtil.getRemoteIp();
             AnonymousUser anonymousUser = new AnonymousUser();
             anonymousUser.setId(UUID.randomUUID().toString());
-            // todo
-            anonymousUser.setIp("xxxx");
-            anonymousUser.setUsername("一位不愿透露姓名的网友");
+            // todo, xxf 获取请求ip
+            anonymousUser.setIp(remoteIp);
+            anonymousUser.setUsername("不愿透露姓名的网友");
             anonymousUserRepository.save(anonymousUser);
             articleComment.setAnonymousAuthor(anonymousUser);
         }
         articleCommentRepository.save(articleComment);
         articleCommentRepository.updateArticleIdAndReplyToId(req.getArticleId(), req.getReplyToId(), articleComment.getId());
-        return BasicResp.ok(articleComment.getId());
+        ArticleCommentResp resp = new ArticleCommentResp(articleComment, articleCommentRepository);
+        return BasicResp.ok(resp);
     }
 
     @GetMapping

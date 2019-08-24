@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
-@RequestMapping("article")
+@RequestMapping({"article", "public/article"})
 @RestController
 @Transactional
 public class ArticleController {
