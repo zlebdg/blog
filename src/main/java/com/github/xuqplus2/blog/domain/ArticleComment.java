@@ -62,7 +62,7 @@ public class ArticleComment extends BasicDomain {
 
     public String getAuthorNickname() {
         if (null != this.author)
-            return this.author.getAppId();
+            return this.author.getNickname();
         return null;
     }
 
