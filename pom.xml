@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.github.xuqplus2</groupId>
-    <artifactId>java-web-demo</artifactId>
+    <artifactId>blog</artifactId>
     <version>0.0.1</version>
     <name>blog</name>
 
