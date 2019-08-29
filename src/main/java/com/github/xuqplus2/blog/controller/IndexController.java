@@ -4,8 +4,6 @@ import com.github.xuqplus2.blog.repository.OAuthCallbackAddressRepository;
 import com.github.xuqplus2.blog.service.EncryptService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,16 +23,14 @@ public class IndexController {
     @Autowired
     EncryptService encryptService;
 
-    @GetMapping("/")
-    public Object index(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    @GetMapping
+    public void index(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String referer = request.getHeader("Referer");
         if (!StringUtils.isEmpty(referer)) {
             response.sendRedirect(String.format("%s#/oauth/callbackPage", referer));
-            return null;
+            return;
         }
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Object principal = authentication.getPrincipal();
-        log.info("principal=>{}", principal);
-        return principal;
+        response.sendRedirect("/blog");
+        return;
     }
 }
