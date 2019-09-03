@@ -2,6 +2,7 @@ package com.github.xuqplus2.blog.controller.article;
 
 import com.github.xuqplus2.blog.domain.AnonymousUser;
 import com.github.xuqplus2.blog.domain.ArticleComment;
+import com.github.xuqplus2.blog.domain.ArticleInfo;
 import com.github.xuqplus2.blog.domain.User;
 import com.github.xuqplus2.blog.repository.*;
 import com.github.xuqplus2.blog.util.AppNotLoginException;
@@ -38,6 +39,8 @@ public class ArticleCommentController {
     @Autowired
     ArticleCommentRepository articleCommentRepository;
     @Autowired
+    ArticleInfoRepository articleInfoRepository;
+    @Autowired
     ArticleRepository articleRepository;
     @Autowired
     AppTextRepository appTextRepository;
@@ -55,6 +58,10 @@ public class ArticleCommentController {
         if (null != req.getReplyToId() && !articleCommentRepository.existsById(req.getReplyToId())) {
             throw new RuntimeException("回复的评论不存在, id=" + req.getReplyToId());
         }
+        // 评论数加
+        ArticleInfo articleInfo = articleInfoRepository.getById(req.getArticleId());
+        articleInfo.commentPlus();
+        // 保存评论数据
         ArticleComment articleComment = new ArticleComment(req);
         if (null != articleComment.getAppText()) {
             appTextRepository.save(articleComment.getAppText());
@@ -73,6 +80,7 @@ public class ArticleCommentController {
             articleComment.setAnonymousAuthor(anonymousUser);
         }
         articleCommentRepository.save(articleComment);
+        articleInfoRepository.save(articleInfo);
         articleCommentRepository.updateArticleIdAndReplyToId(req.getArticleId(), req.getReplyToId(), articleComment.getId());
         ArticleCommentResp resp = new ArticleCommentResp(articleComment, articleCommentRepository);
         return BasicResp.ok(resp);

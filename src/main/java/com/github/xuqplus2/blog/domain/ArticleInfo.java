@@ -24,4 +24,8 @@ public class ArticleInfo extends BasicDomain {
     public void readPlus() {
         this.read++;
     }
+
+    public void commentPlus() {
+        this.comment++;
+    }
 }
