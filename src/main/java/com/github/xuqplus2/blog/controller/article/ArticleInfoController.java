@@ -1,9 +1,6 @@
 package com.github.xuqplus2.blog.controller.article;
 
-import com.github.xuqplus2.blog.domain.ArticleInfo;
-import com.github.xuqplus2.blog.domain.User;
-import com.github.xuqplus2.blog.domain.UserDisliked;
-import com.github.xuqplus2.blog.domain.UserLiked;
+import com.github.xuqplus2.blog.domain.*;
 import com.github.xuqplus2.blog.repository.*;
 import com.github.xuqplus2.blog.util.AppNotLoginException;
 import com.github.xuqplus2.blog.util.CurrentUserUtil;
@@ -38,6 +35,8 @@ public class ArticleInfoController {
     UserLikedRepository userLikedRepository;
     @Autowired
     UserDislikedRepository userDislikedRepository;
+    @Autowired
+    UserStarredRepository userStarredRepository;
 
     @GetMapping("userArticleInfo")
     public ResponseEntity userArticleInfo(Long id) throws AppNotLoginException {
@@ -45,7 +44,8 @@ public class ArticleInfoController {
         User user = CurrentUserUtil.currentUser(userRepository);
         boolean liked = userLikedRepository.existsByArticleInfoIdAndUserId(id, user.getId());
         boolean disliked = userDislikedRepository.existsByArticleInfoIdAndUserId(id, user.getId());
-        return BasicResp.ok(new ArticleInfoResp(info, user.getId(), liked, disliked, disliked));
+        boolean starred = userStarredRepository.existsByArticleInfoIdAndUserId(id, user.getId());
+        return BasicResp.ok(new ArticleInfoResp(info, user.getId(), liked, disliked, starred));
     }
 
     @Transactional
@@ -122,5 +122,34 @@ public class ArticleInfoController {
             articleInfoRepository.save(info);
         }
         return BasicResp.ok(new ArticleInfoResp(info, user.getId(), null, false, null));
+    }
+
+    @Transactional
+    @PostMapping("star")
+    public ResponseEntity star(Long id) throws AppNotLoginException {
+        ArticleInfo info = articleInfoRepository.getById(id);
+        User user = CurrentUserUtil.currentUser(userRepository);
+        UserStarred starred = userStarredRepository.getByArticleInfoIdAndUserId(id, user.getId());
+        if (null == starred) {
+            starred = new UserStarred(info, user);
+            info.starPlus();
+            userStarredRepository.save(starred);
+            articleInfoRepository.save(info);
+        }
+        return BasicResp.ok(new ArticleInfoResp(info, user.getId(), null, null, true));
+    }
+
+    @Transactional
+    @PostMapping("unstar")
+    public ResponseEntity unstar(Long id) throws AppNotLoginException {
+        ArticleInfo info = articleInfoRepository.getById(id);
+        User user = CurrentUserUtil.currentUser(userRepository);
+        UserStarred starred = userStarredRepository.getByArticleInfoIdAndUserId(id, user.getId());
+        if (null != starred) {
+            info.starMinus();
+            userStarredRepository.delete(starred);
+            articleInfoRepository.save(info);
+        }
+        return BasicResp.ok(new ArticleInfoResp(info, user.getId(), null, null, false));
     }
 }
