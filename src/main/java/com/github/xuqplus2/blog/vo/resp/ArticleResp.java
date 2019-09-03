@@ -18,7 +18,7 @@ public class ArticleResp extends VO {
     private String parseType;
     private String hash;
     private User author;
-    private ArticleInfo articleInfo;
+    private ArticleInfoResp articleInfo;
 
     public ArticleResp(Article article) {
         this.id = article.getId();
@@ -30,7 +30,7 @@ public class ArticleResp extends VO {
         this.parseType = article.getParseType();
         this.hash = article.getHash();
         this.author = article.getAuthor();
-        this.articleInfo = article.getArticleInfo();
+        this.articleInfo = new ArticleInfoResp(article.getArticleInfo());
     }
 
     public ArticleResp(Article article, boolean withoutText) {
@@ -42,6 +42,6 @@ public class ArticleResp extends VO {
         this.parseType = article.getParseType();
         this.hash = article.getHash();
         this.author = article.getAuthor();
-        this.articleInfo = article.getArticleInfo();
+        this.articleInfo = new ArticleInfoResp(article.getArticleInfo());
     }
 }

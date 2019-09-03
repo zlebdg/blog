@@ -32,4 +32,8 @@ public class ArticleInfo extends BasicDomain {
     public void likePlus() {
         this.like++;
     }
+
+    public void likeMinus() {
+        this.like--;
+    }
 }
