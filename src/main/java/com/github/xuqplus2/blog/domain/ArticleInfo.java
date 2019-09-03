@@ -28,4 +28,8 @@ public class ArticleInfo extends BasicDomain {
     public void commentPlus() {
         this.comment++;
     }
+
+    public void likePlus() {
+        this.like++;
+    }
 }
