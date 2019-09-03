@@ -20,4 +20,8 @@ public class ArticleInfo extends BasicDomain {
     private int trans; // 转发
     @Column(name = "read_")
     private int read; // 阅读
+
+    public void readPlus() {
+        this.read++;
+    }
 }
