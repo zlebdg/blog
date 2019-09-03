@@ -2,6 +2,7 @@ package com.github.xuqplus2.blog.controller.article;
 
 import com.github.xuqplus2.blog.domain.ArticleInfo;
 import com.github.xuqplus2.blog.domain.User;
+import com.github.xuqplus2.blog.domain.UserDisliked;
 import com.github.xuqplus2.blog.domain.UserLiked;
 import com.github.xuqplus2.blog.repository.*;
 import com.github.xuqplus2.blog.util.AppNotLoginException;
@@ -35,12 +36,16 @@ public class ArticleInfoController {
     AnonymousUserRepository anonymousUserRepository;
     @Autowired
     UserLikedRepository userLikedRepository;
+    @Autowired
+    UserDislikedRepository userDislikedRepository;
 
     @GetMapping("userArticleInfo")
     public ResponseEntity userArticleInfo(Long id) throws AppNotLoginException {
+        ArticleInfo info = articleInfoRepository.getById(id);
         User user = CurrentUserUtil.currentUser(userRepository);
         boolean liked = userLikedRepository.existsByArticleInfoIdAndUserId(id, user.getId());
-        return BasicResp.ok(new ArticleInfoResp(user.getId(), liked, null, null));
+        boolean disliked = userDislikedRepository.existsByArticleInfoIdAndUserId(id, user.getId());
+        return BasicResp.ok(new ArticleInfoResp(info, user.getId(), liked, disliked, disliked));
     }
 
     @Transactional
@@ -88,5 +93,34 @@ public class ArticleInfoController {
             articleInfoRepository.save(info);
         }
         return BasicResp.ok(new ArticleInfoResp(info, user.getId(), false, null, null));
+    }
+
+    @Transactional
+    @PostMapping("dislike")
+    public ResponseEntity dislike(Long id) throws AppNotLoginException {
+        ArticleInfo info = articleInfoRepository.getById(id);
+        User user = CurrentUserUtil.currentUser(userRepository);
+        UserDisliked disliked = userDislikedRepository.getByArticleInfoIdAndUserId(id, user.getId());
+        if (null == disliked) {
+            disliked = new UserDisliked(info, user);
+            info.dislikePlus();
+            userDislikedRepository.save(disliked);
+            articleInfoRepository.save(info);
+        }
+        return BasicResp.ok(new ArticleInfoResp(info, user.getId(), null, true, null));
+    }
+
+    @Transactional
+    @PostMapping("undislike")
+    public ResponseEntity undislike(Long id) throws AppNotLoginException {
+        ArticleInfo info = articleInfoRepository.getById(id);
+        User user = CurrentUserUtil.currentUser(userRepository);
+        UserDisliked disliked = userDislikedRepository.getByArticleInfoIdAndUserId(id, user.getId());
+        if (null != disliked) {
+            info.dislikeMinus();
+            userDislikedRepository.delete(disliked);
+            articleInfoRepository.save(info);
+        }
+        return BasicResp.ok(new ArticleInfoResp(info, user.getId(), null, false, null));
     }
 }

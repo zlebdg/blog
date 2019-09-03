@@ -1,6 +1,7 @@
 package com.github.xuqplus2.blog.domain;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +9,7 @@ import javax.persistence.Id;
 
 @Data
 @Entity
+@EqualsAndHashCode(callSuper = true)
 public class ArticleInfo extends BasicDomain {
     @Id
     private Long id;
@@ -35,5 +37,13 @@ public class ArticleInfo extends BasicDomain {
 
     public void likeMinus() {
         this.like--;
+    }
+
+    public void dislikePlus() {
+        this.dislike++;
+    }
+
+    public void dislikeMinus() {
+        this.dislike--;
     }
 }

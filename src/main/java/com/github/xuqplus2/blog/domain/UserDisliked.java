@@ -1,12 +1,14 @@
 package com.github.xuqplus2.blog.domain;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Data
 @Entity
-public class UserDisiked extends BasicDomain {
+@NoArgsConstructor
+public class UserDisliked extends BasicDomain {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -14,4 +16,9 @@ public class UserDisiked extends BasicDomain {
     private User user;
     @ManyToOne
     private ArticleInfo articleInfo;
+
+    public UserDisliked(ArticleInfo info, User user) {
+        this.articleInfo = info;
+        this.user = user;
+    }
 }

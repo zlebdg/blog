@@ -38,13 +38,6 @@ public class ArticleInfoResp extends VO {
         this.starred = starred;
     }
 
-    public ArticleInfoResp(String userId, Boolean liked, Boolean disliked, Boolean starred) {
-        this.userId = userId;
-        this.liked = liked;
-        this.disliked = disliked;
-        this.starred = starred;
-    }
-
     public ArticleInfoResp(ArticleInfo info) {
         this.id = info.getId();
         this.like = info.getLike();
@@ -53,6 +46,7 @@ public class ArticleInfoResp extends VO {
         this.comment = info.getComment();
         this.trans = info.getTrans();
         this.read = info.getRead();
+        // todo
         this.userId = "";
         this.liked = false;
         this.disliked = false;
