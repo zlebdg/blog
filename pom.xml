@@ -133,11 +133,11 @@
                 <pom.db.username>test</pom.db.username>
                 <pom.db.password>123456</pom.db.password>
                 <!--mail-->
-                <pom.postfix.host>xjplus.xyz</pom.postfix.host>
-                <pom.postfix.port>25</pom.postfix.port>
-                <pom.postfix.protocol>smtp</pom.postfix.protocol>
-                <pom.postfix.username>postfix@xjplus.xyz</pom.postfix.username>
-                <pom.postfix.password>123456</pom.postfix.password>
+                <pom.postfix.host>smtp.163.com</pom.postfix.host>
+                <pom.postfix.port>465</pom.postfix.port>
+                <pom.postfix.protocol>smtps</pom.postfix.protocol>
+                <pom.postfix.username>xuqplus@163.com</pom.postfix.username>
+                <pom.postfix.password>f5m0eRKA7miiyUNb</pom.postfix.password>
                 <!--activiti-->
                 <pom.activiti.use.strong.uuids>false</pom.activiti.use.strong.uuids>
                 <pom.activiti.history.level>full</pom.activiti.history.level>
@@ -162,8 +162,8 @@
                 <pom.db.password>123456</pom.db.password>
                 <!--mail-->
                 <pom.postfix.host>smtp.163.com</pom.postfix.host>
-                <pom.postfix.port>25</pom.postfix.port>
-                <pom.postfix.protocol>smtp</pom.postfix.protocol>
+                <pom.postfix.port>465</pom.postfix.port>
+                <pom.postfix.protocol>smtps</pom.postfix.protocol>
                 <pom.postfix.username>xuqplus@163.com</pom.postfix.username>
                 <pom.postfix.password>f5m0eRKA7miiyUNb</pom.postfix.password>
                 <!--activiti-->
