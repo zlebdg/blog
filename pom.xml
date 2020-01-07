@@ -133,11 +133,6 @@
                 <pom.db.username>test</pom.db.username>
                 <pom.db.password>123456</pom.db.password>
                 <!--mail-->
-                <!--<pom.postfix.host>smtp.163.com</pom.postfix.host>-->
-                <!--<pom.postfix.port>25</pom.postfix.port>-->
-                <!--<pom.postfix.protocol>smtp</pom.postfix.protocol>-->
-                <!--<pom.postfix.username>xuqplus@163.com</pom.postfix.username>-->
-                <!--<pom.postfix.password>f5m0eRKA7miiyUNb</pom.postfix.password>-->
                 <pom.postfix.host>xjplus.xyz</pom.postfix.host>
                 <pom.postfix.port>25</pom.postfix.port>
                 <pom.postfix.protocol>smtp</pom.postfix.protocol>
@@ -166,47 +161,19 @@
                 <pom.db.username>test</pom.db.username>
                 <pom.db.password>123456</pom.db.password>
                 <!--mail-->
-                <pom.postfix.host>Tool-postfix</pom.postfix.host>
+                <pom.postfix.host>smtp.163.com</pom.postfix.host>
                 <pom.postfix.port>25</pom.postfix.port>
                 <pom.postfix.protocol>smtp</pom.postfix.protocol>
-                <pom.postfix.username>postfix@xjplus.xyz</pom.postfix.username>
-                <pom.postfix.password>123456</pom.postfix.password>
+                <pom.postfix.username>xuqplus@163.com</pom.postfix.username>
+                <pom.postfix.password>f5m0eRKA7miiyUNb</pom.postfix.password>
                 <!--activiti-->
                 <pom.activiti.use.strong.uuids>false</pom.activiti.use.strong.uuids>
                 <pom.activiti.history.level>full</pom.activiti.history.level>
                 <!--oauth client-->
                 <pom.security.oauth2.client.client-id>client</pom.security.oauth2.client.client-id>
                 <pom.security.oauth2.client.client-secret>secret</pom.security.oauth2.client.client-secret>
-                <pom.security.oauth2.server.domain>http://106.12.80.76:20011</pom.security.oauth2.server.domain>
-                <pom.security.oauth2.client.pre-established-redirect-uri>http://106.12.80.76:8081/login</pom.security.oauth2.client.pre-established-redirect-uri>
-            </properties>
-        </profile>
-        <profile>
-            <id>prod</id>
-            <properties>
-                <!--project-->
-                <pom.project.profile>prod</pom.project.profile>
-                <pom.server.port>8080</pom.server.port>
-                <!--database-->
-                <pom.db.host>Tool-mysql</pom.db.host>
-                <pom.db.port>3306</pom.db.port>
-                <pom.db.database>prod_blog</pom.db.database>
-                <pom.db.username>prod</pom.db.username>
-                <pom.db.password>123456</pom.db.password>
-                <!--mail-->
-                <pom.postfix.host>Tool-postfix</pom.postfix.host>
-                <pom.postfix.port>25</pom.postfix.port>
-                <pom.postfix.protocol>smtp</pom.postfix.protocol>
-                <pom.postfix.username>postfix@xjplus.xyz</pom.postfix.username>
-                <pom.postfix.password>123456</pom.postfix.password>
-                <!--activiti-->
-                <pom.activiti.use.strong.uuids>true</pom.activiti.use.strong.uuids>
-                <pom.activiti.history.level>full</pom.activiti.history.level>
-                <!--oauth client-->
-                <pom.security.oauth2.client.client-id>client</pom.security.oauth2.client.client-id>
-                <pom.security.oauth2.client.client-secret>secret</pom.security.oauth2.client.client-secret>
-                <pom.security.oauth2.server.domain>http://106.12.80.76:20010</pom.security.oauth2.server.domain>
-                <pom.security.oauth2.client.pre-established-redirect-uri>http://106.12.80.76:8080/login</pom.security.oauth2.client.pre-established-redirect-uri>
+                <pom.security.oauth2.server.domain>http://auth.java8.xyz:81</pom.security.oauth2.server.domain>
+                <pom.security.oauth2.client.pre-established-redirect-uri>http://auth.java8.xyz:81/login</pom.security.oauth2.client.pre-established-redirect-uri>
             </properties>
         </profile>
     </profiles>
