@@ -182,8 +182,8 @@
                 <!--oauth client-->
                 <pom.security.oauth2.client.client-id>client</pom.security.oauth2.client.client-id>
                 <pom.security.oauth2.client.client-secret>secret</pom.security.oauth2.client.client-secret>
-                <pom.security.oauth2.server.domain>http://auth.java8.xyz:81</pom.security.oauth2.server.domain>
-                <pom.security.oauth2.client.pre-established-redirect-uri>http://blog.java8.xyz:81/login
+                <pom.security.oauth2.server.domain>https://auth.java8.xyz:444</pom.security.oauth2.server.domain>
+                <pom.security.oauth2.client.pre-established-redirect-uri>https://blog.java8.xyz:444/login
                 </pom.security.oauth2.client.pre-established-redirect-uri>
             </properties>
         </profile>
