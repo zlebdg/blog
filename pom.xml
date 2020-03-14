@@ -153,9 +153,10 @@
                 <!--oauth client-->
                 <pom.security.oauth2.client.client-id>client</pom.security.oauth2.client.client-id>
                 <pom.security.oauth2.client.client-secret>secret</pom.security.oauth2.client.client-secret>
-                <pom.security.oauth2.server.domain>http://auth.local:20010</pom.security.oauth2.server.domain>
-                <pom.security.oauth2.client.pre-established-redirect-uri>http://blog.local:5000/login
+                <pom.security.oauth2.server.domain>http://auth.loc:20010</pom.security.oauth2.server.domain>
+                <pom.security.oauth2.client.pre-established-redirect-uri>http://blog.loc:5000/login
                 </pom.security.oauth2.client.pre-established-redirect-uri>
+                <pom.project.redis>spring.redis.host=auth.loc</pom.project.redis>
             </properties>
         </profile>
         <profile>
@@ -185,6 +186,7 @@
                 <pom.security.oauth2.server.domain>https://auth.java8.xyz:444</pom.security.oauth2.server.domain>
                 <pom.security.oauth2.client.pre-established-redirect-uri>https://blog.java8.xyz:444/login
                 </pom.security.oauth2.client.pre-established-redirect-uri>
+                <pom.project.redis>spring.redis.cluster.nodes=10.0.255.126:6379</pom.project.redis>
             </properties>
         </profile>
     </profiles>
