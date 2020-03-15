@@ -141,6 +141,8 @@
                 <pom.db.database>test_blog</pom.db.database>
                 <pom.db.username>test</pom.db.username>
                 <pom.db.password>123456</pom.db.password>
+                <!--web index-->
+                <pom.project.web.index>http://blog.loc:5000/blog/</pom.project.web.index>
                 <!--mail-->
                 <pom.postfix.host>smtp.163.com</pom.postfix.host>
                 <pom.postfix.port>465</pom.postfix.port>
@@ -171,6 +173,8 @@
                 <pom.db.database>test_blog</pom.db.database>
                 <pom.db.username>test</pom.db.username>
                 <pom.db.password>123456</pom.db.password>
+                <!--web index-->
+                <pom.project.web.index>https://blog.java8.xyz:444/blog/</pom.project.web.index>
                 <!--mail-->
                 <pom.postfix.host>smtp.163.com</pom.postfix.host>
                 <pom.postfix.port>465</pom.postfix.port>
