@@ -61,6 +61,7 @@ public class AppLoginFilter implements Filter {
                                 httpServletResponse
                                         .sendRedirect(String.format("%s#/oauth/callbackPage?%s",
                                                 address.getReferer(), httpServletRequest.getQueryString()));
+                                callbackAddressRepository.delete(address);
                                 return;
                             }
                         }
