@@ -17,4 +17,6 @@ public interface OAuthCallbackAddressRepository extends JpaRepository<OAuthCallb
     @Modifying
     @Query("update OAuthCallbackAddress a set a.referer = ?1, a.updateAt = ?2 where a.id = ?3")
     void updateRefererById(String referer, long l, String id);
+
+    void deleteByCreateAtLessThan(Long mills);
 }
