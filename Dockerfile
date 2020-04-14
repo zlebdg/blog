@@ -1,3 +1,3 @@
-FROM zlebdg/alpine-openjdk8-jre:latest
+FROM zlebdg/alpine-openjdk8-dbg:latest
 
 COPY target/*.jar /app.jar
