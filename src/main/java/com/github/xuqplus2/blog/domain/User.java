@@ -1,5 +1,6 @@
 package com.github.xuqplus2.blog.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.github.xuqplus2.blog.vo.resp.CurrentUser;
 import lombok.Data;
 
@@ -8,6 +9,7 @@ import javax.persistence.Id;
 
 @Entity
 @Data
+@JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler" })
 public class User extends BasicDomain {
 
     public static final long USER_INFO_EXPIRED_MILLS = 1000L * 60 * 10;

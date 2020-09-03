@@ -61,7 +61,7 @@ public class AppExceptionHandler { // 捕获 Controller 内的异常
      */
     @ExceptionHandler(value = Throwable.class)
     public Object handle(Throwable t) throws HttpMediaTypeNotAcceptableException {
-        log.error("t.message={}", t.getMessage());
+        log.error("t.message={}", t.getMessage(), t);
         return handle(t.getMessage());
     }
 
