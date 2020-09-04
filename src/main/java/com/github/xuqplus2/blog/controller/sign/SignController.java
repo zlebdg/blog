@@ -32,7 +32,7 @@ public class SignController {
 
     @GetMapping("signed/list")
     public ResponseEntity signedList(Pageable pageable) throws AppNotLoginException {
-        Page<Document> documents = documentRepository.findAllByUser(CurrentUserUtil.currentUser(userRepository), pageable);
+        Page<Document> documents = documentRepository.findAllByUserOrderByCreateAtDesc(CurrentUserUtil.currentUser(userRepository), pageable);
         return ResponseEntity.ok().body(documents);
     }
 

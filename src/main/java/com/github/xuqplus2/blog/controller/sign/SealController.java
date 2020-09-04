@@ -33,7 +33,7 @@ public class SealController {
 
     @GetMapping("list")
     public ResponseEntity list(Pageable pageable) throws AppNotLoginException {
-        Page<Seal> seals = sealRepository.findAllByUser(CurrentUserUtil.currentUser(userRepository), pageable);
+        Page<Seal> seals = sealRepository.findAllByUserOrderByCreateAtDesc(CurrentUserUtil.currentUser(userRepository), pageable);
         return ResponseEntity.ok().body(seals);
     }
 

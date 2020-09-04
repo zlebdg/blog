@@ -8,5 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SealRepository extends JpaRepository<Seal, Long> {
 
-    Page<Seal> findAllByUser(User user, Pageable pageable);
+    Page<Seal> findAllByUserOrderByCreateAtDesc(User user, Pageable pageable);
 }
