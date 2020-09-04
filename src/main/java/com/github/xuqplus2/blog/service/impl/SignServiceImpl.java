@@ -25,8 +25,11 @@ import com.itextpdf.text.pdf.security.MakeSignature;
 import com.itextpdf.text.pdf.security.PrivateKeySignature;
 import lombok.extern.slf4j.Slf4j;
 import net.coobird.thumbnailator.Thumbnails;
+import org.apache.commons.io.IOUtils;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -63,7 +66,7 @@ public class SignServiceImpl implements SignService {
     DocumentRepository documentRepository;
 
     // 签名要素
-    private static String ksFile = "classpath:ks";
+    private static String ksFile = "ks";
     private static char[] password = "123123".toCharArray();
     private static String contact = "445172495@qq.com";
     private static String reason = "-_-.测试签名不需要理由.-_-";
@@ -114,7 +117,7 @@ public class SignServiceImpl implements SignService {
         BouncyCastleProvider provider = new BouncyCastleProvider();
         Security.addProvider(provider);
         KeyStore ks = KeyStore.getInstance(KeyStore.getDefaultType());
-        try (FileInputStream stream = new FileInputStream(ResourceUtils.getFile(ksFile))) {
+        try (InputStream stream = new ClassPathResource(ksFile).getInputStream()) {
             ks.load(stream, password);
         }
         String alias = ks.aliases().nextElement();
