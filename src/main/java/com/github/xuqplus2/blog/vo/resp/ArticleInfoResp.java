@@ -39,6 +39,9 @@ public class ArticleInfoResp extends VO {
     }
 
     public ArticleInfoResp(ArticleInfo info) {
+        if (null == info) {
+            return;
+        }
         this.id = info.getId();
         this.like = info.getLike();
         this.dislike = info.getDislike();

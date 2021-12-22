@@ -154,11 +154,11 @@
                 <!--database-->
                 <pom.db.host>localhost</pom.db.host>
                 <pom.db.port>3306</pom.db.port>
-                <pom.db.database>test_blog</pom.db.database>
+                <pom.db.database>dev_blog</pom.db.database>
                 <pom.db.username>test</pom.db.username>
                 <pom.db.password>123456</pom.db.password>
                 <!--web index-->
-                <pom.project.web.index>http://blog.loc:5000/blog/</pom.project.web.index>
+                <pom.project.web.index>http://blog.loc:5000/blog-web/</pom.project.web.index>
                 <!--mail-->
                 <pom.postfix.host>smtp.163.com</pom.postfix.host>
                 <pom.postfix.port>465</pom.postfix.port>
@@ -174,7 +174,7 @@
                 <pom.security.oauth2.server.domain>http://auth.loc:20010</pom.security.oauth2.server.domain>
                 <pom.security.oauth2.client.pre-established-redirect-uri>http://blog.loc:5000/login
                 </pom.security.oauth2.client.pre-established-redirect-uri>
-                <pom.project.redis>spring.redis.host=auth.loc</pom.project.redis>
+                <pom.project.redis>spring.redis.host=localhost</pom.project.redis>
             </properties>
         </profile>
         <profile>
@@ -184,13 +184,13 @@
                 <pom.project.profile>test</pom.project.profile>
                 <pom.server.port>8080</pom.server.port>
                 <!--database-->
-                <pom.db.host>Tool-mysql</pom.db.host>
+                <pom.db.host>host.docker.internal</pom.db.host>
                 <pom.db.port>3306</pom.db.port>
                 <pom.db.database>test_blog</pom.db.database>
                 <pom.db.username>test</pom.db.username>
                 <pom.db.password>123456</pom.db.password>
                 <!--web index-->
-                <pom.project.web.index>https://blog.java8.xyz:444/blog/</pom.project.web.index>
+                <pom.project.web.index>https://718a-223-167-21-215.ngrok.io/blog-web/</pom.project.web.index>
                 <!--mail-->
                 <pom.postfix.host>smtp.163.com</pom.postfix.host>
                 <pom.postfix.port>465</pom.postfix.port>
@@ -203,10 +203,11 @@
                 <!--oauth client-->
                 <pom.security.oauth2.client.client-id>client</pom.security.oauth2.client.client-id>
                 <pom.security.oauth2.client.client-secret>secret</pom.security.oauth2.client.client-secret>
-                <pom.security.oauth2.server.domain>https://auth.java8.xyz:444</pom.security.oauth2.server.domain>
-                <pom.security.oauth2.client.pre-established-redirect-uri>https://blog.java8.xyz:444/login
+                <pom.security.oauth2.server.domain>https://718a-223-167-21-215.ngrok.io/auth</pom.security.oauth2.server.domain>
+                <pom.security.oauth2.client.pre-established-redirect-uri>https://718a-223-167-21-215.ngrok.io/blog/login
                 </pom.security.oauth2.client.pre-established-redirect-uri>
-                <pom.project.redis>spring.redis.cluster.nodes=10.0.255.126:6379</pom.project.redis>
+                <!--<pom.project.redis>spring.redis.cluster.nodes=10.0.255.126:6379</pom.project.redis>-->
+                <pom.project.redis>spring.redis.host=host.docker.internal</pom.project.redis>
             </properties>
         </profile>
     </profiles>
