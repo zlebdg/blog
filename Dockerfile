@@ -1,6 +1,3 @@
-FROM zlebdg/alpine-openjdk8-dbg:latest
+FROM zlebdg/alpine-openjdk8-jre:latest
 
 COPY target/*.jar /app.jar
-
-CMD tini -- java -jar app.jar
- 
