@@ -26,7 +26,7 @@ import java.util.Optional;
 
 @Slf4j
 @RestController
-@RequestMapping({"file"})
+@RequestMapping({"blog/file"})
 public class FileController {
 
     @Autowired

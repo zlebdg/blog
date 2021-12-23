@@ -32,7 +32,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@RequestMapping({"article", "public/article"})
+@RequestMapping({"blog/article", "blog/public/article"})
 @RestController
 @Transactional
 public class ArticleController {

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Arrays;
 
 @RestController
-@RequestMapping("test/param")
+@RequestMapping("blog/test/param")
 public class TestParamController {
 
     @GetMapping

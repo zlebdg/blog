@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-@RequestMapping("test/dva")
+@RequestMapping("blog/test/dva")
 public class TestDvaController {
 
     @GetMapping("query")

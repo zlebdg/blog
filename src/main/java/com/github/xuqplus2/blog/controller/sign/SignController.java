@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.transaction.Transactional;
 
 @RestController
-@RequestMapping({"sign"})
+@RequestMapping({"blog/sign"})
 public class SignController {
 
     @Autowired

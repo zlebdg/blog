@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("test/fetch")
+@RequestMapping("blog/test/fetch")
 public class TestFetchController {
 
     private static final String uploadFileDir = String.format("uploadFileDir%s", File.separator);

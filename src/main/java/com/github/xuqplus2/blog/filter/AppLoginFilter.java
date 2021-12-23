@@ -34,12 +34,13 @@ public class AppLoginFilter implements Filter {
         if (request instanceof HttpServletRequest && response instanceof HttpServletResponse) {
             HttpServletRequest httpServletRequest = (HttpServletRequest) request;
             HttpServletResponse httpServletResponse = (HttpServletResponse) response;
-            if ("/login".equalsIgnoreCase(((HttpServletRequest) request).getRequestURI())) {
+            if ("/blog/login".equalsIgnoreCase(((HttpServletRequest) request).getRequestURI())) {
                 String referer = httpServletRequest.getHeader("referer");
                 String state = request.getParameter("state");
                 if (StringUtils.isEmpty(state)) {
                     try {
                         chain.doFilter(request, response);
+                        return;
                     } catch (UserRedirectRequiredException e) {
                         httpServletRequest.getSession().setAttribute(CALLBACK_URL, referer);
                         String key = e.getStateKey();

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("test/mail")
+@RequestMapping("blog/test/mail")
 @Slf4j
 public class TestMailController {
     @Autowired

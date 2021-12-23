@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.transaction.Transactional;
 
 @RestController
-@RequestMapping({"seal"})
+@RequestMapping({"blog/seal"})
 public class SealController {
 
     @Autowired

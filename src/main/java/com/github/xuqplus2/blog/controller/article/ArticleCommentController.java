@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
-@RequestMapping({"articleComment", "public/articleComment"})
+@RequestMapping({"blog/articleComment", "blog/public/articleComment"})
 public class ArticleCommentController {
 
     @Autowired

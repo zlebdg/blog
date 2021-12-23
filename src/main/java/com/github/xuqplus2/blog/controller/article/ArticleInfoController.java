@@ -18,7 +18,7 @@ import javax.transaction.Transactional;
 
 @Slf4j
 @RestController
-@RequestMapping({"articleInfo", "public/articleInfo"})
+@RequestMapping({"blog/articleInfo", "blog/public/articleInfo"})
 public class ArticleInfoController {
 
     @Autowired

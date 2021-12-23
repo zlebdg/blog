@@ -20,7 +20,7 @@ import java.util.Map;
 
 @Slf4j
 @RestController
-@RequestMapping("auth")
+@RequestMapping("blog/auth")
 public class LoginController {
 
     @Value("${security.oauth2.logout.uri}")

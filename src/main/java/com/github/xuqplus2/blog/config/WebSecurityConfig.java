@@ -28,14 +28,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterBefore(appLoginFilter, AbstractPreAuthenticatedProcessingFilter.class)
                 .antMatcher("/**")
                 .authorizeRequests()
-                .antMatchers("/article**/**").hasAuthority("article")
+                .antMatchers("/blog/article**/**").hasAuthority("article")
                 .antMatchers("/",
-                        "/auth**/**",
-                        "/test**/**",
-                        "/public**/**",
-                        "/login**").permitAll()
+                        "/blog/auth**/**",
+                        "/blog/test**/**",
+                        "/blog/public**/**",
+                        "/blog/login**/**").permitAll()
                 .anyRequest().authenticated().and()
-                .logout().logoutUrl("auth/logout").permitAll().and()
+                .formLogin().loginProcessingUrl("/blog/login").and()
+                // there's an endpoint
+                // .logout().logoutUrl("/blog/auth/logout").permitAll().and()
                 .csrf().disable();
     }
 
