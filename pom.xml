@@ -203,8 +203,13 @@
                 <!--oauth client-->
                 <pom.security.oauth2.client.client-id>client</pom.security.oauth2.client.client-id>
                 <pom.security.oauth2.client.client-secret>secret</pom.security.oauth2.client.client-secret>
-                <pom.security.oauth2.server.domain>https://1991-103-140-136-251.ngrok.io</pom.security.oauth2.server.domain>
-                <pom.security.oauth2.client.pre-established-redirect-uri>https://1991-103-140-136-251.ngrok.io/blog/login
+                <!--server side-->
+                <pom.security.oauth2.server.domain>
+                    https://1991-103-140-136-251.ngrok.io
+                </pom.security.oauth2.server.domain>
+                <!--client side-->
+                <pom.security.oauth2.client.pre-established-redirect-uri>
+                    https://1991-103-140-136-251.ngrok.io/blog/login
                 </pom.security.oauth2.client.pre-established-redirect-uri>
                 <!--<pom.project.redis>spring.redis.cluster.nodes=10.0.255.126:6379</pom.project.redis>-->
                 <pom.project.redis>spring.redis.host=host.docker.internal</pom.project.redis>
