@@ -22,7 +22,7 @@ node("win10") {
 
         }
         powershell('''
-            docker run -itd --restart always -p 50000:20000 --name blog local/blog
+            docker run -itd --restart always -p 11000:20000 --name blog local/blog
         ''')
     }
 }
