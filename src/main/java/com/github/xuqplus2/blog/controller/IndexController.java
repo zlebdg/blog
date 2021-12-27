@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.net.URL;
 
 @Slf4j
 @RequestMapping
@@ -24,6 +25,11 @@ public class IndexController {
         String referer = request.getHeader("referer");
         if (!StringUtils.isEmpty(referer)) {
             response.sendRedirect(String.format("%s#/oauth/callbackPage", referer));
+            return;
+        }
+        if (index.contains("ngrok.io")) {
+            URL url = new URL(index);
+            response.sendRedirect(String.format("%s", url.getPath()));
             return;
         }
         response.sendRedirect(index);
