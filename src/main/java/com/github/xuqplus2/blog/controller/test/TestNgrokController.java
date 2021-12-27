@@ -4,11 +4,12 @@ import lombok.extern.slf4j.Slf4j;
 import okhttp3.Credentials;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import org.joda.time.DateTime;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.net.URL;
 
 @Slf4j
@@ -16,8 +17,14 @@ import java.net.URL;
 @RequestMapping("blog/test/ngrok")
 public class TestNgrokController {
 
+    @Value("${project.web.index}")
+    String index;
+
     @RequestMapping
-    public String a(@RequestBody String text) {
+    public String a(@RequestBody String text, HttpServletRequest request) {
+        if (!request.getHeader("host").contains("ngrok.io")) {
+            return "only trigger when request host contains 'ngrok.io'";
+        }
         log.debug("text>{}", text);
         try {
             for (String s : text.split("\n")) {
@@ -27,7 +34,11 @@ public class TestNgrokController {
                     int r = s.indexOf("ngrok.io") + 8;
                     String domain = new URL(s.substring(l, r)).getHost();
                     log.info("domain>{}", domain);
-                    triggerJenkinsBuild(domain);
+                    if (!index.contains(domain)) {
+                        triggerJenkinsBuild(domain);
+                    } else {
+                        return String.format("not need to trigger for '%s'", domain);
+                    }
                     break;
                 }
             }
@@ -37,13 +48,7 @@ public class TestNgrokController {
         return "ok";
     }
 
-    DateTime lastTrigger = null;
-    int triggerCD = 1000; // time in seconds
-
     synchronized void triggerJenkinsBuild(String domain) throws Exception {
-        if (null != lastTrigger && DateTime.now().minusSeconds(triggerCD).isBefore(lastTrigger)) {
-            return;
-        }
         final String tokenName = "token-4-xuqplus";
         final String jenkinsUsername = "xuqplus";
         final String jenkinsUserToken = "11a41b785bba7d9ed80a1c908f3fc1454a";
@@ -55,6 +60,5 @@ public class TestNgrokController {
                 .addHeader("Authorization", Credentials.basic(jenkinsUsername, jenkinsUserToken))
                 .build()).execute().body().string();
         log.info("response>{}", response);
-        lastTrigger = DateTime.now();
     }
 }
